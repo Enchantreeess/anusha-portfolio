@@ -1,0 +1,45 @@
+{
+  "_comment": "Album order is display order. To add one: paste its Spotify album id (the segment after /album/ in a share link) with artist, year and scene, then run `npm run refresh-music` to fill in title and download the cover.",
+  "albums": [
+    {
+      "id": "4eLPsYPBmXABThSJ821sqY",
+      "artist": "Kendrick Lamar",
+      "year": 2017,
+      "scene": "Western",
+      "title": "DAMN.",
+      "cover": "/music/kendrick-lamar-damn.webp"
+    },
+    {
+      "id": "16PSZwABl4VFJvfDFOPOoB",
+      "artist": "Seedhe Maut",
+      "year": 2023,
+      "scene": "Indian hip-hop",
+      "title": "Lunch Break",
+      "cover": "/music/seedhe-maut-lunch-break.webp"
+    },
+    {
+      "id": "4LU4HbH4wC2pW40UT6mnPv",
+      "artist": "Dave",
+      "year": 2019,
+      "scene": "UK / drill",
+      "title": "PSYCHODRAMA",
+      "cover": "/music/dave-psychodrama.webp"
+    },
+    {
+      "id": "1pnm9zBlblhTRlE46ItLzU",
+      "artist": "Central Cee",
+      "year": 2025,
+      "scene": "UK / drill",
+      "title": "CAN'T RUSH GREATNESS",
+      "cover": "/music/central-cee-can-t-rush-greatness.webp"
+    },
+    {
+      "id": "5S1Og4Ubi4afuiBOzyBhmW",
+      "artist": "Stormzy",
+      "year": 2017,
+      "scene": "UK / drill",
+      "title": "Gang Signs & Prayer",
+      "cover": "/music/stormzy-gang-signs-prayer.webp"
+    }
+  ]
+}

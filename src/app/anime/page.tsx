@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { CommandMenu } from "@/components/command-menu";
@@ -7,7 +8,7 @@ import { FooterBackground } from "@/components/FooterBackground";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { AnimeGrid } from "@/components/AnimeGrid";
 import { animeList, animeStats } from "@/data/animeData";
-import { musicScenes, nowPlaying } from "@/data/musicData";
+import { albums, musicScenes, nowPlaying } from "@/data/musicData";
 
 export const metadata: Metadata = {
   title: "Anime & Rap | Paras",
@@ -173,6 +174,46 @@ export default function AnimePage() {
               </div>
             </div>
           </div>
+        </div>
+
+        <div className="flex items-center justify-between gap-4 pb-3 pt-8">
+          <h3 className="font-mono text-[10px] font-medium uppercase tracking-wider text-zinc-400 dark:text-zinc-600">
+            Albums on rotation
+          </h3>
+          <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-400 dark:text-zinc-600">
+            {String(albums.length).padStart(2, "0")} records
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+          {albums.map((album) => (
+            <a
+              key={album.id}
+              href={`https://open.spotify.com/album/${album.id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex flex-col gap-2 rounded-[6px] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-zinc-500"
+            >
+              <div className="relative aspect-square overflow-hidden rounded-[6px] border border-black/5 bg-zinc-100 dark:border-white/5 dark:bg-[#0a0a0a]">
+                <Image
+                  src={album.cover}
+                  alt={`${album.title} by ${album.artist}`}
+                  fill
+                  sizes="(min-width: 1024px) 18vw, 45vw"
+                  quality={78}
+                  className="object-cover saturate-[.85] transition-[filter,transform] duration-500 ease-out group-hover:saturate-100 motion-safe:group-hover:scale-[1.03]"
+                />
+              </div>
+              <div className="flex flex-col gap-0.5">
+                <p className="truncate text-[12.5px] font-medium text-zinc-800 dark:text-zinc-200">
+                  {album.title}
+                </p>
+                <p className="truncate font-mono text-[10px] text-zinc-400 dark:text-zinc-600">
+                  {album.artist} · {album.year}
+                </p>
+              </div>
+            </a>
+          ))}
         </div>
 
         <div className="relative mt-10">

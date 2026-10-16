@@ -1,3 +1,5 @@
+import raw from "./music.json";
+
 export type Scene = {
   scene: string;
   artists: string[];
@@ -35,3 +37,19 @@ export const nowPlaying = {
   title: "DNA.",
   artist: "Kendrick Lamar",
 };
+
+
+export type Album = {
+  id: string;
+  artist: string;
+  year: number;
+  scene: string;
+  title: string;
+  cover: string;
+};
+
+/**
+ * Array order is display order. Titles and covers are filled by
+ * `npm run refresh-music`, so adding one only means pasting a Spotify album id.
+ */
+export const albums = (raw.albums as Album[]).filter((a) => a.cover);

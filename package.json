@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "refresh-stats": "node scripts/refresh-stats.mjs"
+    "refresh-stats": "node scripts/refresh-stats.mjs",
+    "refresh-music": "node scripts/refresh-music.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.23",
