@@ -61,7 +61,7 @@ export function ExperienceList() {
                       sizes="40px"
                       quality={60}
                       style={item.imageZoom ? { transform: `scale(${item.imageZoom})` } : undefined}
-                      className={`${item.imageFit === "contain" ? "object-contain" : "object-cover"} w-full h-full p-0.5`}
+                      className={`${item.imageFit === "contain" ? "object-contain" : "object-cover"} w-full h-full ${item.imageBleed ? "" : "p-0.5"}`}
                     />
                   </div>
                 </div>

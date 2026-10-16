@@ -6,6 +6,8 @@ export type ExperienceData = {
   src: string;
   type?: string;
   imageFit?: "contain" | "cover";
+  /** Logos that are their own coloured tile bleed to the edge instead of sitting inset on white. */
+  imageBleed?: boolean;
   imageZoom?: number;
   description: string;
   tech: string[];
@@ -43,11 +45,13 @@ export const experiences: ExperienceData[] = [
     dates: "Sep 2026 - Present",
     location: "Bengaluru, India",
     type: "Remote",
-    src: "/Experience-image/obliq.png",
+    src: "/Experience-image/obliq-white.png",
     imageFit: "cover",
+    imageBleed: true,
     imageZoom: 1,
     description: `
       Leading GitHub and the product/UI side of OBLIQ
+      Backed by the NVIDIA Inception, Atlassian, Auth0 by Okta, GitLab, MongoDB, Sarvam, Zendesk and Zoho programs
       Owning repository structure, contribution workflow and release hygiene
       Shaping the product surface and interface decisions as the team builds
     `,
