@@ -16,6 +16,16 @@ export type Highlight = {
  */
 export const highlightsData: Highlight[] = [
   {
+    id: "gsoc-2026-completed",
+    title: "Completed Google Summer of Code 2026 with the International Catrobat Association",
+    badge: "GSoC 2026",
+    image: "/highlights/gsoc-certificate.webp",
+    imageWidth: 1200,
+    imageHeight: 924,
+    imageFit: "contain",
+    cardWidth: 300,
+  },
+  {
     id: "gsoc-2026",
     title: "Selected for Google Summer of Code 2026 with the International Catrobat Association",
     badge: "GSoC 2026",
