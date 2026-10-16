@@ -42,7 +42,7 @@ const timelineItems: TimelineItem[] = [
     start: 75,
     end: 100,
     align: "start",
-    icon: "/Experience-image/obliq.png",
+    icon: "/Experience-image/obliq-white.png",
     barClassName:
       "border-[#18181b] bg-[#18181b] text-white hover:border-[#3f3f46] hover:bg-[#3f3f46]",
   },
@@ -68,7 +68,7 @@ const timelineItems: TimelineItem[] = [
     start: 56,
     end: 69,
     align: "start",
-    icon: "/Experience-image/natwest.png",
+    icon: "/Experience-image/natwest-tile.png",
     barClassName:
       "border-[#6d28d9] bg-[#6d28d9] text-white hover:border-[#7c3aed] hover:bg-[#7c3aed]",
   },
@@ -94,7 +94,7 @@ const timelineItems: TimelineItem[] = [
     start: 44,
     end: 50,
     align: "start",
-    icon: "/Experience-image/revdau.png",
+    icon: "/Experience-image/revdau-tile.png",
     barClassName:
       "border-[#dc2626] bg-[#dc2626] text-white hover:border-[#ef4444] hover:bg-[#ef4444]",
   },
@@ -107,7 +107,7 @@ const timelineItems: TimelineItem[] = [
     start: 6,
     end: 31,
     align: "end",
-    icon: "/Experience-image/carver.png",
+    icon: "/Experience-image/carver-tile.png",
     barClassName:
       "border-[#27272a] bg-[#27272a] text-white hover:border-[#3f3f46] hover:bg-[#3f3f46]",
   },
@@ -168,7 +168,7 @@ export function ExperienceTimeline({ onSelect }: ExperienceTimelineProps) {
         dir="rtl"
         className="relative min-h-0 flex-1 overflow-x-auto overflow-y-hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
-        <div dir="ltr" className="flex h-full w-full flex-col sm:w-[620px] 2xl:w-full">
+        <div dir="ltr" className="flex h-full w-full flex-col sm:w-[620px] xl:w-full">
           <div className="relative h-6 shrink-0 font-mono text-[9px] tracking-[0.08em] text-zinc-400 dark:text-zinc-600 sm:text-[10px]">
             <span className="absolute left-0">2025</span>
             <span className="absolute left-[59%] -translate-x-1/2">2026</span>
@@ -219,25 +219,39 @@ export function ExperienceTimeline({ onSelect }: ExperienceTimelineProps) {
                     aria-label={`View ${item.label}`}
                     aria-describedby={`experience-timeline-tip-${item.experienceIndex}`}
                     onClick={() => onSelect(item.experienceIndex)}
-                    className={`${styles.bar} relative flex h-8 w-full cursor-pointer items-center overflow-hidden rounded-md border px-2 text-[10px] font-bold shadow-[0_3px_10px_rgba(0,0,0,0.18)] ring-1 ring-inset ring-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 ${
-                      item.align === "end" ? "justify-end" : "justify-start"
-                    } ${item.barClassName}`}
+                    className="relative flex h-8 w-full cursor-pointer items-center rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500"
                   >
-                    <span className="relative z-10 flex min-w-max items-center gap-1.5">
-                      <span className="relative flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-[4px] border border-black/10 bg-white dark:border-black/15">
-                        <Image
-                          src={item.icon}
-                          alt=""
-                          aria-hidden="true"
-                          width={16}
-                          height={16}
-                          sizes="16px"
-                          quality={60}
-                          className={`size-full object-contain p-px ${item.iconClassName ?? ""}`}
-                        />
-                      </span>
-                      <span className="whitespace-nowrap sm:hidden">{item.shortLabel}</span>
-                      <span className="hidden whitespace-nowrap sm:inline">{item.label}</span>
+                    {/* The coloured bar is its own layer: the shine sweep needs a
+                        clip, and the label below must escape it. */}
+                    <span
+                      aria-hidden="true"
+                      className={`${styles.bar} absolute inset-0 overflow-hidden rounded-md border shadow-[0_3px_10px_rgba(0,0,0,0.18)] ring-1 ring-inset ring-white/15 ${item.barClassName}`}
+                    />
+                    <span
+                      className={`relative z-10 flex size-4 shrink-0 items-center justify-center overflow-hidden rounded-[4px] border border-black/10 bg-white dark:border-black/15 ${
+                        item.end >= 95 ? "ml-1" : "ml-auto mr-1"
+                      }`}
+                    >
+                      <Image
+                        src={item.icon}
+                        alt=""
+                        aria-hidden="true"
+                        width={16}
+                        height={16}
+                        sizes="16px"
+                        quality={60}
+                        className={`size-full rounded-[3px] object-cover p-px ${item.iconClassName ?? ""}`}
+                      />
+                    </span>
+                    {/* Names sit outside the bar. A six-percent-wide role cannot
+                        hold its own name, and the clipping read as a bug. */}
+                    <span
+                      className={`pointer-events-none absolute z-10 whitespace-nowrap text-[10px] font-semibold text-zinc-700 dark:text-zinc-300 sm:text-[11px] ${
+                        item.end >= 95 ? "right-full mr-2" : "left-full ml-2"
+                      }`}
+                    >
+                      <span className="sm:hidden">{item.shortLabel}</span>
+                      <span className="hidden sm:inline">{item.label}</span>
                     </span>
                   </button>
                   <div
