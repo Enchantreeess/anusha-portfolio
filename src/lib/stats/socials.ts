@@ -1,5 +1,5 @@
 import { handles } from "@/data/links";
-import { REVALIDATE, withFallback } from "./shared";
+import { REVALIDATE, requestTimeout, withFallback } from "./shared";
 import { getLeetCode } from "./leetcode";
 
 export type SocialProfileData = {
@@ -32,6 +32,7 @@ function getGithubProfile() {
   return withFallback<SocialProfileData>("github-profile", async () => {
     const res = await fetch(`https://api.github.com/users/${handles.github}`, {
       next: { revalidate: REVALIDATE },
+      signal: requestTimeout(),
       headers: { Accept: "application/vnd.github+json" },
     });
     if (!res.ok) throw new Error(`github http ${res.status}`);
@@ -65,6 +66,7 @@ function getXProfile() {
   return withFallback<SocialProfileData>("x-profile", async () => {
     const res = await fetch(`https://x.com/${handles.x}`, {
       next: { revalidate: REVALIDATE },
+      signal: requestTimeout(),
       headers: { "User-Agent": "Mozilla/5.0 (compatible; portfolio/1.0)" },
     });
     if (!res.ok) throw new Error(`x http ${res.status}`);

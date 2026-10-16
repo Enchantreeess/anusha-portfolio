@@ -47,3 +47,17 @@ export function buildCalendar(counts: Map<string, number>, days = 365): HeatmapD
   }
   return out;
 }
+
+/**
+ * Every upstream here is either an unofficial endpoint or an HTML scrape, and a
+ * build machine's IP gets rate-limited or blackholed far more often than a
+ * laptop's. `withFallback` only catches rejections, and undici's default
+ * headers timeout is 300s - so a host that accepts the connection and then
+ * stalls costs five minutes per call before anything throws. Six of those is a
+ * build that looks hung. Each request carries its own deadline instead.
+ */
+export const FETCH_TIMEOUT_MS = 8000;
+
+export function requestTimeout(ms = FETCH_TIMEOUT_MS): AbortSignal {
+  return AbortSignal.timeout(ms);
+}

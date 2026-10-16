@@ -1,7 +1,7 @@
 import type { LeetCodeStats } from "@/types";
 import { handles } from "@/data/links";
 import snapshot from "@/data/stats-snapshot.json";
-import { REVALIDATE, buildCalendar, withFallback } from "./shared";
+import { REVALIDATE, requestTimeout, buildCalendar, withFallback } from "./shared";
 
 const QUERY = `query u($u: String!) {
   matchedUser(username: $u) {
@@ -29,6 +29,7 @@ export function getLeetCode(): Promise<LeetCodeStats> {
       },
       body: JSON.stringify({ query: QUERY, variables: { u: handles.leetcode } }),
       next: { revalidate: REVALIDATE },
+      signal: requestTimeout(),
     });
     if (!res.ok) throw new Error(`leetcode http ${res.status}`);
 

@@ -1,13 +1,14 @@
 import type { CodeforcesStats } from "@/types";
 import { handles } from "@/data/links";
 import snapshot from "@/data/stats-snapshot.json";
-import { REVALIDATE, withFallback } from "./shared";
+import { REVALIDATE, requestTimeout, withFallback } from "./shared";
 
 type CfEnvelope<T> = { status: string; result: T; comment?: string };
 
 async function cf<T>(path: string): Promise<T> {
   const res = await fetch(`https://codeforces.com/api/${path}`, {
     next: { revalidate: REVALIDATE },
+    signal: requestTimeout(),
     headers: { "User-Agent": "portfolio stats fetcher" },
   });
   if (!res.ok) throw new Error(`codeforces http ${res.status}`);

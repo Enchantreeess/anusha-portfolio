@@ -1,7 +1,7 @@
 import type { GithubStats, HeatmapDay } from "@/types";
 import { handles } from "@/data/links";
 import snapshot from "@/data/stats-snapshot.json";
-import { REVALIDATE, withFallback } from "./shared";
+import { REVALIDATE, requestTimeout, withFallback } from "./shared";
 
 const QUERY = `query u($login: String!) {
   user(login: $login) {
@@ -37,6 +37,7 @@ export function getGithub(): Promise<GithubStats> {
       },
       body: JSON.stringify({ query: QUERY, variables: { login: handles.github } }),
       next: { revalidate: REVALIDATE },
+      signal: requestTimeout(),
     });
     if (!res.ok) throw new Error(`github http ${res.status}`);
 

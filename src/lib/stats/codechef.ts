@@ -1,7 +1,7 @@
 import type { CodeChefStats } from "@/types";
 import { handles } from "@/data/links";
 import snapshot from "@/data/stats-snapshot.json";
-import { REVALIDATE, withFallback } from "./shared";
+import { REVALIDATE, requestTimeout, withFallback } from "./shared";
 
 type RatingEntry = { rating: string; rank: string; name: string; end_date: string };
 
@@ -31,6 +31,7 @@ export function getCodeChef(): Promise<CodeChefStats> {
           "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36",
       },
       next: { revalidate: REVALIDATE },
+      signal: requestTimeout(),
     });
     if (!res.ok) throw new Error(`codechef http ${res.status}`);
 
