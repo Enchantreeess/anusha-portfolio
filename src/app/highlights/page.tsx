@@ -86,7 +86,7 @@ export default function AllHighlightsPage() {
           </span>
         </div>
 
-        <section aria-label="All highlights" className="grid grid-cols-1 items-start gap-5 pt-2 sm:grid-cols-2 sm:gap-6">
+        <section aria-label="All highlights" className="grid grid-cols-1 items-stretch gap-5 pt-2 sm:grid-cols-2 sm:gap-6">
           {highlightsData.map((item, index) => (
             <HighlightCard key={item.id} item={item} layout="archive" number={index + 1} />
           ))}

@@ -11,7 +11,7 @@ export function HighlightCard({ item, layout = "marquee", number }: { item: High
     <div
       className={cn(
         "relative group",
-        isArchive ? "w-full min-w-0" : "flex-shrink-0",
+        isArchive ? "h-full w-full min-w-0" : "flex-shrink-0",
         !isArchive && !item.cardWidth && "w-[280px] sm:w-[300px]",
       )}
       style={!isArchive && item.cardWidth ? { width: `${item.cardWidth}px` } : undefined}
@@ -25,7 +25,7 @@ export function HighlightCard({ item, layout = "marquee", number }: { item: High
       {/* Main Card Body */}
       <div className={cn(
         "relative flex flex-col rounded-[6px] overflow-hidden bg-zinc-50 dark:bg-[#09090b] border border-black/5 dark:border-white/5 shadow-sm shadow-black/5 dark:shadow-lg dark:shadow-black/80 transition-all duration-300 group-hover:bg-zinc-100/80 dark:group-hover:bg-[#121214]",
-        isArchive && "motion-safe:group-hover:-translate-y-px group-hover:border-black/15 dark:group-hover:border-white/15 group-hover:shadow-md dark:group-hover:shadow-black/90",
+        isArchive && "h-full motion-safe:group-hover:-translate-y-px group-hover:border-black/15 dark:group-hover:border-white/15 group-hover:shadow-md dark:group-hover:shadow-black/90",
       )}>
         {/* Screenshot Image Container */}
         <div className={cn(
@@ -33,10 +33,10 @@ export function HighlightCard({ item, layout = "marquee", number }: { item: High
           !isArchive && "h-[200px]",
         )}>
           {isArchive && item.image ? (
-            <div
-              className="relative w-full overflow-hidden"
-              style={{ aspectRatio: `${item.imageWidth} / ${item.imageHeight}` }}
-            >
+            // One fixed ratio for every archive card. Letting each image set its
+            // own height made the two-column grid ragged - a portrait letter
+            // towered over the landscape photo beside it, leaving dead space.
+            <div className="relative aspect-[4/3] w-full overflow-hidden">
               <Image
                 src={item.image}
                 alt={item.title}
@@ -45,10 +45,12 @@ export function HighlightCard({ item, layout = "marquee", number }: { item: High
                 sizes="(min-width: 768px) 20vw, 100vw"
                 quality={75}
                 className={cn(
-                  "object-cover object-top saturate-[.78] transition-[filter,transform] duration-500 ease-out group-hover:saturate-100",
-                  item.id === "gsoc-2026-certificate"
-                    ? "scale-[1.02] motion-safe:group-hover:scale-[1.03]"
-                    : "motion-safe:group-hover:scale-[1.015]",
+                  "saturate-[.78] transition-[filter,transform] duration-500 ease-out group-hover:saturate-100 motion-safe:group-hover:scale-[1.015]",
+                  // Documents are letterboxed, not cropped: a cover crop of a
+                  // letter or an email throws away the part that proves it.
+                  item.imageFit === "contain"
+                    ? "object-contain p-3"
+                    : "object-cover object-top",
                 )}
                 draggable={false}
               />
@@ -87,7 +89,7 @@ export function HighlightCard({ item, layout = "marquee", number }: { item: High
         />
 
         {/* Info Content Section */}
-        <div className={`flex flex-col gap-1.5 p-3 ${isArchive ? "min-h-[78px] sm:px-4" : "h-[86px]"}`}>
+        <div className={`flex flex-col gap-1.5 p-3 ${isArchive ? "min-h-[78px] flex-1 sm:px-4" : "h-[86px]"}`}>
           <div className="flex items-center justify-between gap-2">
             <span className="inline-flex items-center px-2 py-0.5 rounded-[4px] bg-black/5 dark:bg-white/5 text-[10px] font-semibold tracking-wider uppercase text-zinc-600 dark:text-zinc-400 border border-black/5 dark:border-white/5">
               {item.badge}
