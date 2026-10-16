@@ -73,6 +73,19 @@ export function Education() {
                   <p className="mt-0.5 text-[12px] text-zinc-500 dark:text-zinc-500">
                     {c.issuer}
                     {c.note ? ` · ${c.note}` : ""}
+                    {c.link && (
+                      <>
+                        {" · "}
+                        <a
+                          href={c.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="underline decoration-dotted underline-offset-2 transition-colors hover:text-zinc-900 dark:hover:text-zinc-200"
+                        >
+                          Verify
+                        </a>
+                      </>
+                    )}
                   </p>
                 </div>
               </li>

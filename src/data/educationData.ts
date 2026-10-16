@@ -29,6 +29,7 @@ export type Certification = {
   issuer: string;
   date: string;
   note?: string;
+  link?: string;
 };
 
 export const certifications: Certification[] = [
@@ -37,6 +38,7 @@ export const certifications: Certification[] = [
     issuer: "Nutanix",
     date: "Apr 2026",
     note: "Valid to Apr 2029",
+    link: "https://www.credly.com/badges/09f2d8d3-38ac-4192-b7bd-0b92020319f4",
   },
   {
     name: "Google Cloud Engineering Certificate",
