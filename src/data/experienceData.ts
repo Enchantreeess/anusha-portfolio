@@ -25,6 +25,7 @@ export const experiences: ExperienceData[] = [
     src: "/Experience-image/gocredit-ai.png",
     type: "Hybrid",
     imageFit: "cover",
+    imageBleed: true,
     imageZoom: 1,
     description: `
       Fixing credit for 1 billion Indians
@@ -95,9 +96,10 @@ export const experiences: ExperienceData[] = [
     role: "Software Development Engineer Intern",
     dates: "Jun 2026 - Aug 2026",
     location: "Bengaluru, India",
-    src: "/Experience-image/natwest.png",
+    src: "/Experience-image/natwest-tile.png",
     type: "On-site",
-    imageFit: "contain",
+    imageFit: "cover",
+    imageBleed: true,
     imageZoom: 1,
     description: `
       Built an AI agent that processed bank DLR logs and ranked data products across 15 business domains, cutting manual discovery time by 95% and auto-generating go-to-market summaries
@@ -159,8 +161,9 @@ export const experiences: ExperienceData[] = [
     dates: "Apr 2026 - May 2026",
     location: "Bengaluru, India",
     type: "Part-time",
-    src: "/Experience-image/revdau.png",
-    imageFit: "contain",
+    src: "/Experience-image/revdau-tile.png",
+    imageFit: "cover",
+    imageBleed: true,
     imageZoom: 1,
     description: `
       Built the real-time voice pipeline behind Re-Voice: Twilio media streams into Silero voice-activity detection, Sarvam speech-to-text, a streaming OpenAI LLM and Sarvam text-to-speech over WebSockets
@@ -180,9 +183,10 @@ export const experiences: ExperienceData[] = [
     role: "Software Engineering Intern",
     dates: "Oct 2025 - Feb 2026",
     location: "Bengaluru, India",
-    src: "/Experience-image/carver.png",
+    src: "/Experience-image/carver-tile.png",
     type: "Remote",
-    imageFit: "contain",
+    imageFit: "cover",
+    imageBleed: true,
     imageZoom: 1,
     description: `
       Built production AI workflows converting regulatory annotations from RSS feeds into automated 3-5 minute podcasts and social posts, processing 10-20+ items per run
