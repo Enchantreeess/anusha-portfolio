@@ -32,7 +32,7 @@ export function HighlightCard({ item, layout = "marquee", number }: { item: High
           "relative w-full bg-zinc-100 dark:bg-[#0a0a0a] overflow-hidden",
           !isArchive && "h-[200px]",
         )}>
-          {isArchive ? (
+          {isArchive && item.image ? (
             <div
               className="relative w-full overflow-hidden"
               style={{ aspectRatio: `${item.imageWidth} / ${item.imageHeight}` }}
