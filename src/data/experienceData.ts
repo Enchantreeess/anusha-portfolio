@@ -21,6 +21,7 @@ export const experiences: ExperienceData[] = [
     dates: "Oct 2026 - Present",
     location: "Bengaluru, India",
     src: "/Experience-image/gocredit-ai.png",
+    type: "Hybrid",
     imageFit: "cover",
     imageZoom: 1,
     description: `
@@ -56,8 +57,9 @@ export const experiences: ExperienceData[] = [
     title: "Google Summer of Code 2026",
     role: "Open Source Contributor, International Catrobat Association",
     dates: "May 2026 - Aug 2026",
-    location: "Remote",
+    location: "Bengaluru, India",
     src: "/Experience-image/gsoc.png",
+    type: "Remote",
     imageFit: "contain",
     imageZoom: 0.9,
     description: `
@@ -90,6 +92,7 @@ export const experiences: ExperienceData[] = [
     dates: "Jun 2026 - Aug 2026",
     location: "Bengaluru, India",
     src: "/Experience-image/natwest.png",
+    type: "On-site",
     imageFit: "contain",
     imageZoom: 1,
     description: `
@@ -115,11 +118,12 @@ export const experiences: ExperienceData[] = [
     ],
   },
   {
-    title: "Samsung R&D Institute India",
+    title: "Samsung R&D Institute Bangalore",
     role: "Research & Development Intern",
     dates: "Jan 2026 - Aug 2026",
     location: "Bengaluru, India",
     src: "/Experience-image/samsung.png",
+    type: "Remote",
     imageFit: "contain",
     imageZoom: 0.95,
     description: `
@@ -173,6 +177,7 @@ export const experiences: ExperienceData[] = [
     dates: "Oct 2025 - Feb 2026",
     location: "Bengaluru, India",
     src: "/Experience-image/carver.png",
+    type: "Remote",
     imageFit: "contain",
     imageZoom: 1,
     description: `
