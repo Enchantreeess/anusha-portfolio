@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { usePathname } from "next/navigation";
+import { portfolio } from "~/portfolio.config";
 
 export function RightNavbar() {
   const pathname = usePathname();
@@ -10,13 +11,14 @@ export function RightNavbar() {
 
   const links = useMemo(
     () => [
+      // Blog is hidden while portfolio.config.ts has sections.blog = false.
+      ...(portfolio.sections.blog ? [{ name: "Blog", href: "#blogs" }] : []),
       { name: "Experience", href: "#experience" },
       { name: "Projects", href: "#projects" },
       { name: "Hackathons", href: "#hackathons" },
       { name: "DSA / CP", href: "#dsa" },
       { name: "Skills", href: "#skills" },
       { name: "Education", href: "#education" },
-      { name: "Blog", href: "#blogs" },
       { name: "Anime & Rap", href: "#anime" },
       { name: "Highlights", href: "#highlights" },
     ],

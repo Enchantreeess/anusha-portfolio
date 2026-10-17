@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { portfolio } from "~/portfolio.config";
 import { useRouter } from "next/navigation"
 import { useTheme } from "next-themes"
 import {
@@ -48,12 +49,15 @@ const kbdClass =
 
 const SECTIONS = [
     { id: "experience", label: "Experience", icon: Briefcase, key: "E" },
+    // Hidden while portfolio.config.ts has sections.blog = false.
+    ...(portfolio.sections.blog
+        ? [{ id: "blogs", label: "Blogs", icon: FileText, key: "B" } as const]
+        : []),
     { id: "projects", label: "Projects", icon: Code, key: "P" },
     { id: "hackathons", label: "Hackathons", icon: Trophy, key: "H" },
     { id: "dsa", label: "DSA / CP", icon: Binary, key: "D" },
     { id: "skills", label: "Skills", icon: BookOpen, key: "S" },
     { id: "education", label: "Education", icon: GraduationCap, key: null },
-    { id: "blogs", label: "Blogs", icon: FileText, key: "B" },
     { id: "anime", label: "Anime & Rap", icon: Music, key: "A" },
     { id: "highlights", label: "Highlights", icon: Sparkles, key: null },
     { id: "contact", label: "Socials", icon: Send, key: null },

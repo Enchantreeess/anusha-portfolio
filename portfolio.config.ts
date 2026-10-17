@@ -43,6 +43,23 @@ export const portfolio = {
   bookingLink: "https://cal.com/parascodes/30min",
 
   /**
+   * Search Console verification. Paste the `content` value from Google's
+   * "HTML tag" method here - just the token, not the whole <meta> tag. Left
+   * empty, no verification tag is emitted.
+   */
+  googleSiteVerification: "",
+
+  /**
+   * Toggle optional sections off without deleting their code. The components
+   * and routes stay in place, so flipping one back to true is the whole job.
+   */
+  sections: {
+    /** Off until the first post is written - an empty list reads as neglect. */
+    blog: false,
+    anime: true,
+  },
+
+  /**
    * Profile blurbs for the hover cards. GitHub's is replaced by the live bio
    * when the API answers; the other two are always read from here because
    * X and LinkedIn block unauthenticated requests.

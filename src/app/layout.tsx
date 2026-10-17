@@ -35,6 +35,9 @@ export const metadata: Metadata = {
     siteName: portfolio.name,
     type: "website",
   },
+  ...(portfolio.googleSiteVerification
+    ? { verification: { google: portfolio.googleSiteVerification } }
+    : {}),
   twitter: {
     card: "summary_large_image",
     title: portfolio.name,

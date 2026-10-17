@@ -68,6 +68,23 @@ so reusing a filename serves the old picture long after the file changed.
   self-update.
 - **LinkedIn bio.** Same reason — `bios.linkedin` is read from the config.
 
+## 4b. Getting indexed
+
+The sitemap and `robots.txt` generate themselves, but nothing tells Google the
+site exists until you ask.
+
+1. Open [Google Search Console](https://search.google.com/search-console) and
+   add a **URL prefix** property for your domain.
+2. Choose the **HTML tag** method. Copy only the `content` token out of the tag
+   it shows you.
+3. Paste it into `googleSiteVerification` in `portfolio.config.ts`, then deploy.
+   Leaving it empty emits no tag at all.
+4. Back in Search Console, click **Verify**.
+5. Go to **Sitemaps** and submit `sitemap.xml`.
+
+Indexing takes days, not minutes. Use **URL Inspection → Request indexing** on
+the homepage to nudge the first crawl.
+
 ## 5. Check it
 
 ```bash
