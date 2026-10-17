@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Doto, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { SITE_URL } from "@/lib/site";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -21,10 +22,6 @@ const doto = Doto({
   weight: ["400", "700", "900"],
   display: "swap",
 });
-
-/** One source of truth: metadataBase and the OG url drifted apart before, and
- *  both pointed at a vercel.app host that was never actually deployed. */
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://parascodes.is-a.dev";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
