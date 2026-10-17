@@ -67,7 +67,7 @@ export const portfolio = {
   bios: {
     github: "Concurrent systems, backend services, and production AI/ML",
     x: "GSoC'26 Catrobat | SDE Intern @GoCreditAI | Ex-NatWest, Samsung R&D, Carver Agents",
-    linkedin: "Building concurrent systems, backend services, and production AI/ML.",
+    linkedin: "GSoC'26 Catrobat | SDE Intern at GoCredit AI | Ex-NatWest, Samsung R&D, Carver Agents",
   },
 
   /**
