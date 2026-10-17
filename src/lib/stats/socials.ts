@@ -81,7 +81,7 @@ function getXProfile() {
       bio,
       location: LOCATION,
       banner: true,
-      stats: FOLLOWERS.x ? [{ value: FOLLOWERS.x.toLocaleString(), label: "Followers" }] : [],
+      stats: FOLLOWERS.x ? [{ value: FOLLOWERS.x, label: "Followers" }] : [],
     };
   }, {
     name: portfolio.name,
@@ -124,7 +124,7 @@ function getLinkedInProfile(): SocialProfileData {
     location: portfolio.location,
     banner: true,
     stats: FOLLOWERS.linkedin
-      ? [{ value: FOLLOWERS.linkedin.toLocaleString(), label: "Followers" }]
+      ? [{ value: FOLLOWERS.linkedin, label: "Followers" }]
       : [],
     stale: false,
   };
