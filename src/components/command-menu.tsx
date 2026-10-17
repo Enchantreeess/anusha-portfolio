@@ -62,6 +62,7 @@ const SECTIONS = [
     { id: "anime", label: "Anime & Music", icon: Music, key: "A" },
     { id: "highlights", label: "Highlights", icon: Sparkles, key: "L" },
     { id: "contact", label: "Socials", icon: Send, key: "O" },
+    { id: "guestbook", label: "Guestbook", icon: MessageSquare, key: "N" },
 ] as const
 
 const PROFILES = [

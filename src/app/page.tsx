@@ -15,6 +15,9 @@ import { CommandMenu } from "@/components/command-menu";
 import Link from "next/link";
 import { bookingLink } from "@/data/links";
 import { portfolio } from "~/portfolio.config";
+import { CleanHash } from "@/components/CleanHash";
+import { GuestbookNotes } from "@/components/GuestbookNotes";
+import { getGuestbook } from "@/lib/stats/guestbook";
 import { skillGroups } from "@/data/skillsData";
 import { getSocialProfiles } from "@/lib/stats/socials";
 import SoftPillButton from "@/components/pixel-perfect/soft-pill-button";
@@ -23,6 +26,7 @@ import SocialHoverCard from "@/components/pixel-perfect/social-hover-card";
 import { BannerParticles } from "@/components/BannerParticles";
 import Image from "next/image";
 import { SiGithub, SiLeetcode } from "react-icons/si";
+import { MessageSquare } from "lucide-react";
 
 
 const lightBannerPlaceholder =
@@ -32,9 +36,11 @@ const darkBannerPlaceholder =
 
 export default async function Home() {
   const socialProfiles = await getSocialProfiles();
+  const guestbook = await getGuestbook();
 
   return (
     <div className="min-h-screen w-full bg-white dark:bg-black relative overflow-x-hidden transition-colors duration-300">
+      <CleanHash />
 
       {/* Right Side Blueprint Navigation */}
       <RightNavbar />
@@ -563,6 +569,32 @@ export default async function Home() {
           </div>
         </div>
 
+        {/* Guestbook notes */}
+        <div id="guestbook" className="mt-6 flex flex-col relative scroll-mt-24">
+          <div
+            className="absolute top-0 left-[-100vw] right-[-100vw] h-0 border-t border-black/30 dark:border-white/[0.15] pointer-events-none"
+            style={{ maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)' }}
+          />
+          <div className="absolute top-0 -left-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20" />
+          <div className="absolute top-0 -right-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] translate-x-1/2 -translate-y-1/2 pointer-events-none z-20" />
+
+          <div className="py-2 relative mt-1">
+            <div className="flex items-baseline justify-between gap-3">
+              <h2 className="text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">Guestbook</h2>
+              <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-400 dark:text-zinc-600">
+                {guestbook.total > 0 ? `${String(guestbook.total).padStart(2, "0")} notes` : "via GitHub"}
+              </span>
+            </div>
+            <div className="absolute bottom-0 left-[-100vw] right-[-100vw] h-0 border-b border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)' }} />
+            <div className="absolute bottom-0 -left-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] -translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
+            <div className="absolute bottom-0 -right-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
+          </div>
+
+          <div className="pt-5 pb-2">
+            <GuestbookNotes notes={guestbook.notes} total={guestbook.total} />
+          </div>
+        </div>
+
         {/* Minimal Quote Section */}
         <div className="mt-2 flex flex-col items-center justify-center relative py-6">
           <div className="max-w-[480px] w-full flex flex-col items-center">
@@ -578,9 +610,18 @@ export default async function Home() {
           </div>
         </div>
 
-        {/* Source link - this site is MIT licensed and meant to be forked */}
-        {portfolio.repo && (
-          <div className="flex items-center justify-center pb-6">
+        {/* Source + guestbook links */}
+        <div className="flex flex-wrap items-center justify-center gap-2 pb-6">
+          {portfolio.giscus.repoId && (
+            <Link
+              href="/guestbook"
+              className="group inline-flex items-center gap-2 rounded-[6px] border border-black/5 bg-zinc-50 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 transition-colors hover:text-zinc-700 dark:border-white/5 dark:bg-[#09090b] dark:text-zinc-600 dark:hover:text-zinc-300"
+            >
+              <MessageSquare className="h-3 w-3" aria-hidden="true" />
+              Sign the guestbook
+            </Link>
+          )}
+          {portfolio.repo && (
             <a
               href={portfolio.repo}
               target="_blank"
@@ -590,8 +631,8 @@ export default async function Home() {
               <SiGithub className="h-3 w-3" aria-hidden="true" />
               Source on GitHub
             </a>
-          </div>
-        )}
+          )}
+        </div>
 
         {/* Fading Grid Filler */}
         <div className="flex-grow w-[calc(100%+32px)] -mx-4 h-[300px] relative mt-4">

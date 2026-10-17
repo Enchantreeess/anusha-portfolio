@@ -21,6 +21,7 @@ export function RightNavbar() {
       { name: "Education", href: "#education" },
       { name: "Anime & Music", href: "#anime" },
       { name: "Highlights", href: "#highlights" },
+      { name: "Guestbook", href: "#guestbook" },
     ],
     []
   );
