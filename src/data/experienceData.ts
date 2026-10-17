@@ -160,7 +160,7 @@ export const experiences: ExperienceData[] = [
     role: "Software Engineering Intern",
     dates: "Apr 2026 - May 2026",
     location: "Bengaluru, India",
-    type: "Part-time",
+    type: "Hybrid",
     src: "/Experience-image/revdau-tile.png",
     imageFit: "cover",
     imageBleed: true,
