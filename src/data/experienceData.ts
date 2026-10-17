@@ -74,6 +74,7 @@ export const experiences: ExperienceData[] = [
       Wrote 252 tests that uncovered 2 production crashes the prior suite missed
       Worked inside a long-running open-source codebase with community review, contributing 14 merged pull requests across 8 external repositories alongside the core project
     `,
+    links: [{ label: "Certificate", href: "https://drive.google.com/file/d/1esx__GWFlp7PnnlyiUdzvTaNlWeS2CUP/view" }],
     tech: [
       "Kotlin",
       "Android",
