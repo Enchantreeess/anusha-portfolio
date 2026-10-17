@@ -44,10 +44,12 @@ export const certifications: Certification[] = [
     name: "Google Cloud Engineering Certificate",
     issuer: "Google Cloud Career Launchpad",
     date: "Mar 2026",
+    link: "https://drive.google.com/file/d/1bHj_n0tSEaw1hVLs3SuGa0B2s-3GQab_/view",
   },
   {
     name: "Postman API Fundamentals Student Expert",
     issuer: "Postman",
     date: "Jan 2026",
+    link: "https://badges.parchment.com/public/assertions/2noe-vL3T52TjlcQyGrwKg",
   },
 ];

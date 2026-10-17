@@ -107,6 +107,7 @@ export const experiences: ExperienceData[] = [
       Kept GPT-4o labelling behind grounding validation and deterministic fallbacks so the platform never surfaced an ungrounded answer
       Benchmarked Small Language Models under Federated Learning across Customer and Credit Risk domains, holding accuracy within 3-4% of centralized training with data kept inside domain boundaries
     `,
+    links: [{ label: "Certificate", href: "https://drive.google.com/file/d/1NAUoppik4VPlXnX0joBAql9xdzmFhvIX/view" }],
     tech: [
       "Python",
       "Multi-Agent Systems",
@@ -203,6 +204,7 @@ export const experiences: ExperienceData[] = [
       "RSS",
     ],
     links: [
+      { label: "Certificate", href: "https://drive.google.com/file/d/1B8_qiN9UjAdaUQIM0Ps2F-YaddMIFh6K/view" },
       { label: "Podcasts", href: "https://carveragents.ai/podcasts" },
     ],
     metrics: [
