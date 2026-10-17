@@ -5,40 +5,6 @@ export type Scene = {
   artists: string[];
 };
 
-/**
- * Seeded across the four scenes Paras named. Once the Spotify connector is
- * authorised this can be replaced with his actual top artists.
- */
-export const musicScenes: Scene[] = [
-  {
-    scene: "Indian hip-hop",
-    artists: ["Seedhe Maut", "DIVINE", "KR$NA", "Prabh Deep", "Talha Anjum", "Raftaar", "Karma", "MC Stan"],
-  },
-  {
-    scene: "Western",
-    artists: ["Kendrick Lamar", "J. Cole", "Tyler, the Creator", "Travis Scott", "Eminem", "Drake"],
-  },
-  {
-    scene: "Old school",
-    artists: ["Nas", "The Notorious B.I.G.", "2Pac", "Wu-Tang Clan", "Mobb Deep", "A Tribe Called Quest"],
-  },
-  {
-    scene: "UK / drill",
-    artists: ["Central Cee", "Dave", "Stormzy", "Headie One"],
-  },
-];
-
-/**
- * The track embedded on the page. Swap the id for any Spotify track - it is the
- * segment after /track/ in a Spotify share link.
- */
-export const nowPlaying = {
-  trackId: "6HZILIRieu8S0iqY8kIKhj",
-  title: "DNA.",
-  artist: "Kendrick Lamar",
-};
-
-
 export type Album = {
   id: string;
   artist: string;
@@ -48,8 +14,36 @@ export type Album = {
   cover: string;
 };
 
+export type NowPlaying = {
+  trackId: string;
+  title: string;
+  artist: string;
+};
+
 /**
- * Array order is display order. Titles and covers are filled by
- * `npm run refresh-music`, so adding one only means pasting a Spotify album id.
+ * Everything lives in `music.json` and the array order IS the display order, so
+ * reordering the site is just moving blocks in that file - no code changes.
+ *
+ * Scenes are the artist chips, grouped however you like; the first few of each
+ * are what the homepage teaser shows.
+ */
+export const musicScenes = raw.scenes as Scene[];
+
+/** Every artist across the scenes, for counts and the homepage teaser. */
+export const allArtists = musicScenes.flatMap((s) => s.artists);
+
+/** A few from each scene, so the homepage teaser shows the spread, not one scene. */
+export const featuredArtists = musicScenes.flatMap((s) => s.artists.slice(0, 3));
+
+/**
+ * The track embedded on both pages. Swap the id for any Spotify track - it is
+ * the segment after /track/ in a Spotify share link.
+ */
+export const nowPlaying = raw.nowPlaying as NowPlaying;
+
+/**
+ * To add one: paste a Spotify album id into `music.json` with artist, year and
+ * scene, then run `npm run refresh-music` to fill in the title and download the
+ * cover. Albums without a cover are skipped so a failed fetch never ships a gap.
  */
 export const albums = (raw.albums as Album[]).filter((a) => a.cover);

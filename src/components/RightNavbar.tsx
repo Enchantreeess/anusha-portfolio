@@ -19,7 +19,7 @@ export function RightNavbar() {
       { name: "DSA / CP", href: "#dsa" },
       { name: "Skills", href: "#skills" },
       { name: "Education", href: "#education" },
-      { name: "Anime & Rap", href: "#anime" },
+      { name: "Anime & Music", href: "#anime" },
       { name: "Highlights", href: "#highlights" },
     ],
     []

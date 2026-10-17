@@ -4,6 +4,7 @@
  * Covers are committed so the site never depends on Spotify at request time.
  */
 import { readFile, writeFile } from "node:fs/promises";
+import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 
 const FILE = new URL("../src/data/music.json", import.meta.url);
@@ -26,7 +27,7 @@ for (const album of data.albums) {
   const slug = `${album.artist}-${meta.title}`
     .toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   await sharp(buf).resize(300, 300, { fit: "cover" }).webp({ quality: 82 })
-    .toFile(new URL(`${slug}.webp`, OUT).pathname);
+    .toFile(fileURLToPath(new URL(`${slug}.webp`, OUT)));
   album.cover = `/music/${slug}.webp`;
   console.log(`  ✓ ${meta.title} — ${album.artist} (${album.year})`);
 }

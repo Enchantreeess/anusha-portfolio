@@ -12,7 +12,7 @@ import { albums, musicScenes, nowPlaying } from "@/data/musicData";
 import { portfolio } from "~/portfolio.config";
 
 export const metadata: Metadata = {
-  title: `Anime & Rap | ${portfolio.name}`,
+  title: `Anime & Music | ${portfolio.name}`,
   description: `Everything ${portfolio.name} has watched, and what is on repeat while building.`,
 };
 
@@ -79,7 +79,7 @@ export default function AnimePage() {
             </Link>
             <div className="flex flex-col justify-center">
               <h1 className="mb-0.5 text-[20px] font-bold leading-none tracking-tight text-zinc-800 [text-shadow:-1.5px_0_0_rgba(0,200,255,0.3),1.5px_0_0_rgba(255,80,0,0.3)] dark:text-zinc-100 dark:[text-shadow:-1.5px_0_0_rgba(0,200,255,0.6),1.5px_0_0_rgba(255,80,0,0.6)] sm:text-[24px]">
-                Anime &amp; Rap
+                Anime &amp; Music
               </h1>
               <p className="text-[12px] text-zinc-500 dark:text-zinc-400">What I watch, and what is on repeat</p>
             </div>
@@ -117,7 +117,7 @@ export default function AnimePage() {
 
         <AnimeGrid />
 
-        {/* rap */}
+        {/* music */}
         <div className="relative mt-12">
           <div className="pointer-events-none absolute -left-[100vw] -right-[100vw] top-0 h-0 border-t border-black/30 dark:border-white/[0.15]" style={horizontalDots} />
           <div className="pointer-events-none absolute -left-4 -top-px z-10 h-[2px] w-[2px] bg-black/50 dark:bg-white/[0.25]" />
@@ -125,7 +125,7 @@ export default function AnimePage() {
         </div>
 
         <div className="flex items-center justify-between gap-4 py-5">
-          <h2 className="text-[15px] font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Rap</h2>
+          <h2 className="text-[15px] font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Music</h2>
           <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-400 dark:text-zinc-600">
             {musicScenes.length} scenes
           </span>
@@ -201,7 +201,7 @@ export default function AnimePage() {
                   alt={`${album.title} by ${album.artist}`}
                   fill
                   sizes="(min-width: 1024px) 18vw, 45vw"
-                  quality={78}
+                  quality={75}
                   className="object-cover saturate-[.85] transition-[filter,transform] duration-500 ease-out group-hover:saturate-100 motion-safe:group-hover:scale-[1.03]"
                 />
               </div>

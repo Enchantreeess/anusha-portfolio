@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { animeList, animeStats } from "@/data/animeData";
-import { musicScenes, nowPlaying } from "@/data/musicData";
+import { allArtists, featuredArtists, musicScenes, nowPlaying } from "@/data/musicData";
 
 const dashedX = {
   maskImage:
@@ -54,11 +54,13 @@ export function AnimeMusic() {
 
           <div className="flex flex-col gap-3 px-4 py-3.5">
             <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-              <h3 className="text-[14px] font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Rap</h3>
-              <span className="text-[12px] text-zinc-400 dark:text-zinc-600">four scenes, no loyalty to any</span>
+              <h3 className="text-[14px] font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Music</h3>
+              <span className="text-[12px] text-zinc-400 dark:text-zinc-600">
+                {musicScenes.length} scenes, no loyalty to any
+              </span>
             </div>
             <div className="flex flex-wrap gap-1.5">
-              {musicScenes.flatMap((s) => s.artists).slice(0, 14).map((a) => (
+              {featuredArtists.map((a) => (
                 <span
                   key={a}
                   className="rounded-[6px] border border-black/30 bg-zinc-100 px-2.5 py-1 text-[12px] font-medium text-zinc-600 dark:border-white/[0.15] dark:bg-[#0a0a0a] dark:text-zinc-400"
@@ -67,7 +69,7 @@ export function AnimeMusic() {
                 </span>
               ))}
               <span className="px-1 py-1 font-mono text-[11px] text-zinc-400 dark:text-zinc-600">
-                +{musicScenes.flatMap((s) => s.artists).length - 14} more
+                +{allArtists.length - featuredArtists.length} more
               </span>
             </div>
           </div>
