@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 import * as HoverCard from "@radix-ui/react-hover-card";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { portfolio } from "~/portfolio.config";
 import Image, { getImageProps } from "next/image";
 import lightBannerImage from "../../../public/banner-light.jpg";
 import darkBannerImage from "../../../public/banner-dark.jpg";
@@ -26,59 +27,42 @@ interface SocialProfile {
   }[];
 }
 
+/**
+ * Fallback shown only where a live profile is not passed in (the contact page
+ * is a client component and cannot await the server fetchers). Built from
+ * `portfolio.config.ts` so a fork needs no edits here, and deliberately
+ * carrying no stat numbers - hardcoded counts go stale and this file used to
+ * claim 52 repositories and 19 followers long after both had moved.
+ */
+const avatar = `https://github.com/${portfolio.handles.github}.png`;
+const where = `${portfolio.location} (${portfolio.utcOffset})`;
+
 const socialProfiles: Record<string, SocialProfile> = {
   GitHub: {
-    name: "Paras",
-    handle: "Paras-ydv",
-    avatar: "https://github.com/Paras-ydv.png",
-    bio: "Concurrent systems, backend services, and production AI/ML",
-    location: "Bengaluru, India (UTC +05:30)",
-    stats: [
-      { value: "52", label: "Repositories" },
-      { value: "19", label: "Followers" },
-    ],
+    name: portfolio.name,
+    handle: portfolio.handles.github,
+    avatar,
+    bio: portfolio.bios.github,
+    location: where,
+    stats: [],
   },
   Twitter: {
-    name: "Paras",
-    handle: "@parascodes",
-    avatar: "https://github.com/Paras-ydv.png",
+    name: portfolio.name,
+    handle: `@${portfolio.handles.x}`,
+    avatar,
     banner: true,
-    bio: "GSoC 2026 • Samsung R&D • NatWest • LeetCode Knight",
-    location: "Bengaluru, India (UTC +05:30)",
+    bio: portfolio.bios.x,
+    location: where,
     stats: [],
   },
   LinkedIn: {
-    name: "Paras",
-    handle: "in/parascodes",
-    avatar: "https://github.com/Paras-ydv.png",
+    name: portfolio.name,
+    handle: `in/${portfolio.handles.linkedin}`,
+    avatar,
     banner: true,
-    bio: "Building concurrent systems, backend services, and production AI/ML.",
-    location: "Bengaluru, Karnataka, India",
+    bio: portfolio.bios.linkedin,
+    location: where,
     stats: [],
-  },
-  CodeChef: {
-    name: "Paras",
-    handle: "paras_ydv",
-    avatar: "https://github.com/Paras-ydv.png",
-    banner: true,
-    bio: "2-star \u2605\u2605 \u2022 rated 1480 \u2022 Starters regular",
-    location: "Bengaluru, India (UTC +05:30)",
-    stats: [
-      { value: "1480", label: "Rating" },
-      { value: "7", label: "Contests" },
-    ],
-  },
-  LeetCode: {
-    name: "Paras",
-    handle: "u/parascodes",
-    avatar: "https://github.com/Paras-ydv.png",
-    banner: true,
-    bio: "Knight • 1000+ problems solved • daily streak",
-    location: "Bengaluru, India (UTC +05:30)",
-    stats: [
-      { value: "1074", label: "Solved" },
-      { value: "Knight", label: "Badge" },
-    ],
   },
 };
 

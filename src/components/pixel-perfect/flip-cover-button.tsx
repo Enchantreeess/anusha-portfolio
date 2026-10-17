@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { portfolio } from "~/portfolio.config";
 import styles from "./flip-cover-button.module.css";
 import SoftPillButton from "./soft-pill-button";
 
@@ -20,7 +21,7 @@ interface FlipCoverButtonProps {
  * revealing the button inside.
  */
 export function FlipCoverButton({
-  href = "/Resume_Paras.pdf",
+  href = portfolio.resume,
   label = "Book an intro call",
   className = "",
 }: FlipCoverButtonProps) {

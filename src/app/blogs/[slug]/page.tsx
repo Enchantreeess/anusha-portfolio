@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { portfolio } from "~/portfolio.config";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -52,12 +53,12 @@ export async function generateMetadata({
 
   if (!post) {
     return {
-      title: "Posts | Paras",
+      title: `Posts | ${portfolio.name}`,
     };
   }
 
   return {
-    title: `${post.title} | Paras`,
+    title: `${post.title} | ${portfolio.name}`,
     description: post.description,
     openGraph: {
       title: post.title,

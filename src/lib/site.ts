@@ -1,7 +1,7 @@
+import { portfolio } from "~/portfolio.config";
+
 /**
- * The canonical origin, in one place. `metadataBase`, the sitemap and robots.txt
- * all read from here - they previously drifted apart and pointed at a vercel.app
- * host that was never deployed.
+ * Canonical origin, in one place. metadataBase, the sitemap and robots.txt all
+ * read from here. Edit `portfolio.config.ts`, not this file.
  */
-export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://parascodes.is-a.dev";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || portfolio.url;

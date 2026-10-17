@@ -9,10 +9,11 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { AnimeGrid } from "@/components/AnimeGrid";
 import { animeList, animeStats } from "@/data/animeData";
 import { albums, musicScenes, nowPlaying } from "@/data/musicData";
+import { portfolio } from "~/portfolio.config";
 
 export const metadata: Metadata = {
-  title: "Anime & Rap | Paras",
-  description: "Everything Paras has watched, and what is on repeat while he builds.",
+  title: `Anime & Rap | ${portfolio.name}`,
+  description: `Everything ${portfolio.name} has watched, and what is on repeat while building.`,
 };
 
 const horizontalDots = {

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Doto, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SITE_URL } from "@/lib/site";
+import { portfolio } from "~/portfolio.config";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -25,24 +26,21 @@ const doto = Doto({
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Paras",
-  description:
-    "Software engineer building concurrent systems, backend services, and production AI/ML across C++, Python, Java, and Kotlin.",
+  title: portfolio.name,
+  description: portfolio.description,
   openGraph: {
-    title: "Paras",
-    description:
-      "Software engineer building concurrent systems, backend services, and production AI/ML.",
+    title: portfolio.name,
+    description: portfolio.tagline,
     url: SITE_URL,
-    siteName: "Paras",
+    siteName: portfolio.name,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Paras",
-    description:
-      "Software engineer building concurrent systems, backend services, and production AI/ML.",
-    site: "@parascodes",
-    creator: "@parascodes",
+    title: portfolio.name,
+    description: portfolio.tagline,
+    site: `@${portfolio.handles.x}`,
+    creator: `@${portfolio.handles.x}`,
   },
 };
 

@@ -1,4 +1,5 @@
 "use client";
+import { portfolio } from "~/portfolio.config";
 
 import React, { useEffect, useMemo, useState } from "react";
 
@@ -70,7 +71,7 @@ export function GithubGraph() {
 
       const query = `
         query {
-          user(login: "Paras-ydv") {
+          user(login: "${portfolio.handles.github}") {
             contributionsCollection {
               contributionCalendar {
                 totalContributions
@@ -222,7 +223,7 @@ export function GithubGraph() {
       </div>
 
       <p id="github-activity-summary" className="sr-only">
-        Calendar heatmap showing daily GitHub contribution counts for Paras-ydv over the last year. Scroll horizontally to inspect all weeks.
+        Calendar heatmap showing daily GitHub contribution counts for {portfolio.handles.github} over the last year. Scroll horizontally to inspect all weeks.
       </p>
 
       {/* Graph content — sits directly on the page background */}
