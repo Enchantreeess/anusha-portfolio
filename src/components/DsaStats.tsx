@@ -69,7 +69,7 @@ function StatCard({
 
         <div className="h-px bg-black/30 dark:bg-white/[0.15]" style={dashedX} />
 
-        <div className={`grid grid-cols-2 py-1 ${metrics.length === 5 ? "sm:grid-cols-5" : "sm:grid-cols-4"}`}>
+        <div className={`grid grid-cols-2 py-1 ${metrics.length === 3 ? "sm:grid-cols-3" : metrics.length === 5 ? "sm:grid-cols-5" : "sm:grid-cols-4"}`}>
           {metrics.map((m) => (
             <Metric key={m.label} label={m.label} value={m.value} />
           ))}
@@ -149,7 +149,6 @@ export async function DsaStats() {
         href={`https://leetcode.com/u/${handles.leetcode}`}
         stale={lc.stale}
         metrics={[
-          { label: "Rating", value: lc.rating.toLocaleString() },
           { label: "Peak", value: lc.maxRating.toLocaleString() },
           { label: "Solved", value: lc.solved.all.toLocaleString() },
           { label: "Contest Rank", value: `Top ${lc.topPercentage}%` },
@@ -184,7 +183,6 @@ export async function DsaStats() {
         href={`https://codeforces.com/profile/${cf.handle}`}
         stale={cf.stale}
         metrics={[
-          { label: "Rating", value: cf.rating.toLocaleString() },
           { label: "Peak", value: cf.maxRating.toLocaleString() },
           { label: "Rank", value: cf.rank.charAt(0).toUpperCase() + cf.rank.slice(1) },
           { label: "Solved", value: cf.solved.toLocaleString() },
@@ -199,7 +197,6 @@ export async function DsaStats() {
         href={`https://www.codechef.com/users/${cc.handle}`}
         stale={cc.stale}
         metrics={[
-          { label: "Rating", value: cc.rating.toLocaleString() },
           { label: "Peak", value: cc.maxRating.toLocaleString() },
           { label: "Stars", value: `${cc.stars}\u2605` },
           { label: "Solved", value: cc.solved.toLocaleString() },
