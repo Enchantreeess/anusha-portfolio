@@ -14,17 +14,16 @@ export function Education() {
         <div className="absolute -inset-[5px] rounded-[11px] border border-black/5 dark:border-white/5 pointer-events-none transition-colors duration-300 group-hover:border-black/10 dark:group-hover:border-white/10" />
         <div className="relative flex flex-col h-full rounded-[6px] overflow-hidden bg-zinc-50 dark:bg-[#09090b] border border-black/5 dark:border-white/5 shadow-sm shadow-black/5 dark:shadow-lg dark:shadow-black/80">
           <div className="px-4 pt-3 pb-3">
-            <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-              <h3 className="text-[14px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
-                {education.school}
-              </h3>
-              <span className="ml-auto text-[12px] font-medium text-zinc-400 dark:text-zinc-600 whitespace-nowrap">
-                {education.dates}
-              </span>
-            </div>
+            {/* These cards sit in a narrow column. Competing for one line put
+                the date on its own right-aligned row, and forcing them to
+                share broke the title across three lines - so the date reads
+                as metadata instead. */}
+            <h3 className="text-[14px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">
+              {education.school}
+            </h3>
             <p className="mt-1 text-[13px] text-zinc-600 dark:text-zinc-400">{education.degree}</p>
             <p className="mt-0.5 text-[12px] text-zinc-500 dark:text-zinc-500">
-              CGPA {education.cgpa} · {education.location}
+              {education.dates} · CGPA {education.cgpa} · {education.location}
             </p>
           </div>
 
@@ -64,14 +63,9 @@ export function Education() {
               <li key={c.name}>
                 {i > 0 && <div className="h-px bg-black/30 dark:bg-white/[0.15]" style={dashedX} />}
                 <div className="px-4 py-3">
-                  <div className="flex flex-wrap items-baseline gap-x-2">
-                    <p className="text-[13px] font-medium text-zinc-900 dark:text-zinc-100">{c.name}</p>
-                    <span className="ml-auto text-[12px] font-medium text-zinc-400 dark:text-zinc-600 whitespace-nowrap">
-                      {c.date}
-                    </span>
-                  </div>
+                  <p className="text-[13px] font-medium text-zinc-900 dark:text-zinc-100">{c.name}</p>
                   <p className="mt-0.5 text-[12px] text-zinc-500 dark:text-zinc-500">
-                    {c.issuer}
+                    {c.date} · {c.issuer}
                     {c.note ? ` · ${c.note}` : ""}
                     {c.link && (
                       <>
