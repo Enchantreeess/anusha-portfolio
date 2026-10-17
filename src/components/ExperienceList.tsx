@@ -235,17 +235,31 @@ export function ExperienceList() {
                           {tech}
                         </span>
                       ))}
-                      {item.links?.map((link) => (
+                    </div>
+                  )}
+
+                  {/* Links get their own row: inside the tech list they read as
+                      inert tags, and gating them on `tech` hid them entirely
+                      for any role without one. */}
+                  {item.links && item.links.length > 0 && (
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {item.links.map((link) => (
                         <a
                           key={link.href}
                           href={link.href}
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="inline-flex items-center gap-1 rounded-[4px] border border-zinc-300/70 dark:border-zinc-700/70 bg-white dark:bg-[#161616] px-2 py-0.5 text-[11px] font-medium text-zinc-600 dark:text-zinc-300 transition-colors hover:text-zinc-900 dark:hover:text-zinc-100"
+                          className="group/link inline-flex items-center gap-1.5 rounded-[6px] border border-zinc-300 bg-white px-2.5 py-1 text-[11.5px] font-semibold text-zinc-700 shadow-sm transition-all hover:border-zinc-400 hover:text-zinc-950 dark:border-zinc-700 dark:bg-[#18181b] dark:text-zinc-200 dark:hover:border-zinc-500 dark:hover:text-white"
                         >
                           {link.label}
-                          <svg viewBox="0 0 24 24" className="h-2.5 w-2.5" fill="none" stroke="currentColor" strokeWidth="2.5">
+                          <svg
+                            viewBox="0 0 24 24"
+                            className="h-2.5 w-2.5 transition-transform duration-200 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                          >
                             <line x1="7" y1="17" x2="17" y2="7" />
                             <polyline points="7 7 17 7 17 17" />
                           </svg>
