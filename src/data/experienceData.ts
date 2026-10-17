@@ -127,7 +127,7 @@ export const experiences: ExperienceData[] = [
   {
     title: "Samsung R&D Institute Bangalore",
     role: "Research & Development Intern",
-    dates: "Jan 2026 - Aug 2026",
+    dates: "Jan 2026 - Sep 2026",
     location: "Bengaluru, India",
     src: "/Experience-image/samsung.png",
     type: "Remote",

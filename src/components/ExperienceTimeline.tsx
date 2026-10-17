@@ -75,11 +75,11 @@ const timelineItems: TimelineItem[] = [
   {
     label: "Samsung R&D",
     shortLabel: "Samsung",
-    dates: "Jan 2026 - Aug 2026",
+    dates: "Jan 2026 - Sep 2026",
     detail: "R&D Intern",
     experienceIndex: 4,
     start: 25,
-    end: 69,
+    end: 75,
     align: "end",
     icon: "/Experience-image/samsung.png",
     barClassName:
