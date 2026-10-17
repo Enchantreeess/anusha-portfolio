@@ -22,10 +22,12 @@ const doto = Doto({
   display: "swap",
 });
 
+/** One source of truth: metadataBase and the OG url drifted apart before, and
+ *  both pointed at a vercel.app host that was never actually deployed. */
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://parascodes.is-a.dev";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://paras-portfolio.vercel.app"
-  ),
+  metadataBase: new URL(SITE_URL),
   title: "Paras",
   description:
     "Software engineer building concurrent systems, backend services, and production AI/ML across C++, Python, Java, and Kotlin.",
@@ -33,7 +35,7 @@ export const metadata: Metadata = {
     title: "Paras",
     description:
       "Software engineer building concurrent systems, backend services, and production AI/ML.",
-    url: "https://paras-portfolio.vercel.app",
+    url: SITE_URL,
     siteName: "Paras",
     type: "website",
   },
