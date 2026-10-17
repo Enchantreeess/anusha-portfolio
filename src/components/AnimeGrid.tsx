@@ -10,7 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { animeList, type Anime } from "@/data/animeData";
+import { animeSections, type Anime } from "@/data/animeData";
 
 const statusDot: Record<string, string> = {
   Watching: "bg-emerald-500",
@@ -38,67 +38,84 @@ export function AnimeGrid() {
 
   return (
     <>
-      <section aria-label="Anime watched" className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-        {animeList.map((item, index) => (
-          <article key={`${item.title}-${index}`} className="group relative">
-            <div className="pointer-events-none absolute -inset-[4px] rounded-[10px] border border-black/5 transition-colors duration-300 group-hover:border-black/10 dark:border-white/5 dark:group-hover:border-white/10" />
+      <div className="flex flex-col gap-10">
+        {animeSections.map((section) => (
+          <section key={section.id} aria-labelledby={`anime-${section.id}`}>
+            <div className="flex items-center justify-between gap-4 pb-3">
+              <h3
+                id={`anime-${section.id}`}
+                className="font-mono text-[10px] font-medium uppercase tracking-wider text-zinc-400 dark:text-zinc-600"
+              >
+                {section.title}
+              </h3>
+              <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-400 dark:text-zinc-600">
+                {String(section.items.length).padStart(2, "0")}
+              </span>
+            </div>
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+              {section.items.map((item, index) => (
+                <article key={`${item.title}-${index}`} className="group relative">
+                  <div className="pointer-events-none absolute -inset-[4px] rounded-[10px] border border-black/5 transition-colors duration-300 group-hover:border-black/10 dark:border-white/5 dark:group-hover:border-white/10" />
 
-            <button
-              type="button"
-              onClick={() => setOpen(item)}
-              aria-label={`Details for ${item.title}`}
-              className="relative flex w-full cursor-pointer flex-col overflow-hidden rounded-[6px] border border-black/5 bg-zinc-50 text-left shadow-sm shadow-black/5 transition-all duration-300 group-hover:bg-zinc-100/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900 dark:border-white/5 dark:bg-[#09090b] dark:shadow-lg dark:shadow-black/80 dark:group-hover:bg-[#121214] dark:focus-visible:outline-zinc-100"
-            >
-              <div className="relative aspect-[2/3] w-full overflow-hidden bg-zinc-100 dark:bg-[#0a0a0a]">
-                {item.cover ? (
-                  <Image
-                    src={item.cover}
-                    alt={item.title}
-                    fill
-                    sizes="(min-width: 1024px) 16vw, (min-width: 640px) 30vw, 45vw"
-                    quality={70}
-                    className="object-cover saturate-[.85] transition-[filter,transform] duration-500 ease-out group-hover:saturate-100 motion-safe:group-hover:scale-[1.03]"
-                    draggable={false}
-                  />
-                ) : (
-                  <div
-                    className="absolute inset-0 opacity-[0.06] dark:opacity-[0.05]"
-                    style={{
-                      backgroundImage:
-                        "repeating-linear-gradient(0deg,transparent,transparent 15px,currentColor 15px,currentColor 16px),repeating-linear-gradient(90deg,transparent,transparent 15px,currentColor 15px,currentColor 16px)",
-                    }}
-                  />
-                )}
+                  <button
+                    type="button"
+                    onClick={() => setOpen(item)}
+                    aria-label={`Details for ${item.title}`}
+                    className="relative flex w-full cursor-pointer flex-col overflow-hidden rounded-[6px] border border-black/5 bg-zinc-50 text-left shadow-sm shadow-black/5 transition-all duration-300 group-hover:bg-zinc-100/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900 dark:border-white/5 dark:bg-[#09090b] dark:shadow-lg dark:shadow-black/80 dark:group-hover:bg-[#121214] dark:focus-visible:outline-zinc-100"
+                  >
+                    <div className="relative aspect-[2/3] w-full overflow-hidden bg-zinc-100 dark:bg-[#0a0a0a]">
+                      {item.cover ? (
+                        <Image
+                          src={item.cover}
+                          alt={item.title}
+                          fill
+                          sizes="(min-width: 1024px) 16vw, (min-width: 640px) 30vw, 45vw"
+                          quality={70}
+                          className="object-cover saturate-[.85] transition-[filter,transform] duration-500 ease-out group-hover:saturate-100 motion-safe:group-hover:scale-[1.03]"
+                          draggable={false}
+                        />
+                      ) : (
+                        <div
+                          className="absolute inset-0 opacity-[0.06] dark:opacity-[0.05]"
+                          style={{
+                            backgroundImage:
+                              "repeating-linear-gradient(0deg,transparent,transparent 15px,currentColor 15px,currentColor 16px),repeating-linear-gradient(90deg,transparent,transparent 15px,currentColor 15px,currentColor 16px)",
+                          }}
+                        />
+                      )}
 
-                <span className="absolute left-1.5 top-1.5 rounded-[4px] bg-black/60 px-1.5 py-[1px] font-mono text-[10px] tabular-nums text-white backdrop-blur-sm">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <span
-                  className={`absolute right-1.5 top-1.5 h-2 w-2 rounded-full ring-2 ring-black/30 ${statusDot[item.status] ?? statusDot.Completed}`}
-                  title={item.status}
-                />
-                {item.score ? (
-                  <span className="absolute bottom-1.5 right-1.5 rounded-[4px] bg-black/60 px-1.5 py-[1px] font-mono text-[10px] tabular-nums text-white opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
-                    {item.score}
-                  </span>
-                ) : null}
-              </div>
+                      <span className="absolute left-1.5 top-1.5 rounded-[4px] bg-black/60 px-1.5 py-[1px] font-mono text-[10px] tabular-nums text-white backdrop-blur-sm">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span
+                        className={`absolute right-1.5 top-1.5 h-2 w-2 rounded-full ring-2 ring-black/30 ${statusDot[item.status] ?? statusDot.Completed}`}
+                        title={item.status}
+                      />
+                      {item.score ? (
+                        <span className="absolute bottom-1.5 right-1.5 rounded-[4px] bg-black/60 px-1.5 py-[1px] font-mono text-[10px] tabular-nums text-white opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
+                          {item.score}
+                        </span>
+                      ) : null}
+                    </div>
 
-              <div className="h-px bg-black/30 dark:bg-white/[0.15]" style={dashedX} />
+                    <div className="h-px bg-black/30 dark:bg-white/[0.15]" style={dashedX} />
 
-              <div className="flex flex-1 flex-col gap-0.5 px-2.5 py-2">
-                <h3 className="text-[12.5px] font-semibold leading-tight tracking-tight text-zinc-900 dark:text-zinc-100">
-                  {item.title}
-                </h3>
-                <p className="font-mono text-[10px] tabular-nums text-zinc-400 dark:text-zinc-600">
-                  {item.episodes ? `${item.episodes} ep` : item.note || "—"}
-                  {item.year ? ` · ${item.year}` : ""}
-                </p>
-              </div>
-            </button>
-          </article>
+                    <div className="flex flex-1 flex-col gap-0.5 px-2.5 py-2">
+                      <h3 className="text-[12.5px] font-semibold leading-tight tracking-tight text-zinc-900 dark:text-zinc-100">
+                        {item.title}
+                      </h3>
+                      <p className="font-mono text-[10px] tabular-nums text-zinc-400 dark:text-zinc-600">
+                        {item.episodes ? `${item.episodes} ep` : item.note || "—"}
+                        {item.year ? ` · ${item.year}` : ""}
+                      </p>
+                    </div>
+                  </button>
+                </article>
+              ))}
+            </div>
+          </section>
         ))}
-      </section>
+      </div>
 
       <Dialog open={open !== null} onOpenChange={(v) => !v && setOpen(null)}>
         <DialogContent className="max-w-[min(42rem,calc(100vw-2rem))] overflow-hidden p-0 sm:max-w-[42rem]">
