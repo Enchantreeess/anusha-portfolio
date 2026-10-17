@@ -14,86 +14,15 @@ import { RightNavbar } from "@/components/RightNavbar";
 import { CommandMenu } from "@/components/command-menu";
 import Link from "next/link";
 import { bookingLink } from "@/data/links";
+import { skillGroups } from "@/data/skillsData";
 import { getSocialProfiles } from "@/lib/stats/socials";
 import SoftPillButton from "@/components/pixel-perfect/soft-pill-button";
 import { FlipCoverButton } from "@/components/pixel-perfect/flip-cover-button";
 import SocialHoverCard from "@/components/pixel-perfect/social-hover-card";
 import { BannerParticles } from "@/components/BannerParticles";
 import Image from "next/image";
-import { CircleDot, Radio, Search } from "lucide-react";
-import {
-  SiAndroid,
-  SiCplusplus,
-  SiDocker,
-  SiEclipsemosquitto,
-  SiFastapi,
-  SiGit,
-  SiGithub,
-  SiGithubactions,
-  SiGradle,
-  SiGrafana,
-  SiJavascript,
-  SiJetpackcompose,
-  SiKotlin,
-  SiLeetcode,
-  SiLinux,
-  SiMongodb,
-  SiNextdotjs,
-  SiNodedotjs,
-  SiNumpy,
-  SiOpenjdk,
-  SiOpentelemetry,
-  SiPandas,
-  SiPostgresql,
-  SiPostman,
-  SiPrometheus,
-  SiPytorch,
-  SiPython,
-  SiReact,
-  SiRedis,
-  SiScikitlearn,
-  SiTailwindcss,
-  SiTensorflow,
-  SiTypescript,
-} from "react-icons/si";
+import { SiLeetcode } from "react-icons/si";
 
-const skills = [
-  { name: "C/C++", icon: SiCplusplus },
-  { name: "Python", icon: SiPython },
-  { name: "Java", icon: SiOpenjdk },
-  { name: "Kotlin", icon: SiKotlin },
-  { name: "TypeScript", icon: SiTypescript },
-  { name: "JavaScript", icon: SiJavascript },
-  { name: "React", icon: SiReact },
-  { name: "Next", icon: SiNextdotjs },
-  { name: "Node", icon: SiNodedotjs },
-  { name: "FastAPI", icon: SiFastapi },
-  { name: "WebSockets", icon: Radio },
-  { name: "Android", icon: SiAndroid },
-  { name: "Jetpack Compose", icon: SiJetpackcompose },
-  { name: "Gradle", icon: SiGradle },
-  { name: "PostgreSQL", icon: SiPostgresql },
-  { name: "MongoDB", icon: SiMongodb },
-  { name: "Redis", icon: SiRedis },
-  { name: "MQTT", icon: SiEclipsemosquitto },
-  { name: "scikit-learn", icon: SiScikitlearn },
-  { name: "PyTorch", icon: SiPytorch },
-  { name: "TensorFlow", icon: SiTensorflow },
-  { name: "Pandas", icon: SiPandas },
-  { name: "NumPy", icon: SiNumpy },
-  { name: "RAG", icon: Search },
-  { name: "Docker", icon: SiDocker },
-  { name: "AWS", icon: CircleDot },
-  { name: "Prometheus", icon: SiPrometheus },
-  { name: "Grafana", icon: SiGrafana },
-  { name: "OpenTelemetry", icon: SiOpentelemetry },
-  { name: "GitHub Actions", icon: SiGithubactions },
-  { name: "Tailwind", icon: SiTailwindcss },
-  { name: "Postman", icon: SiPostman },
-  { name: "Linux", icon: SiLinux },
-  { name: "Git", icon: SiGit },
-  { name: "Github", icon: SiGithub },
-];
 
 const lightBannerPlaceholder =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 11'%3E%3Crect width='32' height='11' fill='%23d9e5e7'/%3E%3C/svg%3E";
@@ -465,19 +394,28 @@ export default async function Home() {
             <div className="absolute bottom-0 -right-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] translate-x-1/2 translate-y-1/2 pointer-events-none z-20" />
           </div>
 
-          <div className="relative pt-6 pb-2">
-            <div className="flex flex-wrap gap-2 w-full">
-              {skills.map((skill) => {
-                const SkillIcon = skill.icon;
+          <div className="relative flex flex-col gap-5 pt-6 pb-2">
+            {skillGroups.map((group) => (
+              <div key={group.group}>
+                <p className="font-mono text-[10px] font-medium uppercase tracking-wider text-zinc-400 dark:text-zinc-600">
+                  {group.group}
+                </p>
+                {/* No `grow` here: it stretched the last row's chips across the
+                    full width, so Git and Github read as giant odd buttons. */}
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {group.skills.map((skill) => {
+                    const SkillIcon = skill.icon;
 
-                return (
-                  <div key={skill.name} className="grow flex items-center justify-center gap-2 px-3 py-1.5 bg-zinc-50 hover:bg-zinc-100 dark:bg-[#0a0a0a] dark:hover:bg-[#121214] border border-black/30 dark:border-white/[0.15] rounded-[6px] transition-colors duration-200 cursor-default">
-                    <SkillIcon aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-zinc-500 opacity-80" />
-                    <span className="text-[13px] font-medium text-zinc-600 dark:text-zinc-400">{skill.name}</span>
-                  </div>
-                );
-              })}
-            </div>
+                    return (
+                      <div key={skill.name} className="flex items-center gap-2 px-3 py-1.5 bg-zinc-50 hover:bg-zinc-100 dark:bg-[#0a0a0a] dark:hover:bg-[#121214] border border-black/30 dark:border-white/[0.15] rounded-[6px] transition-colors duration-200 cursor-default">
+                        <SkillIcon aria-hidden="true" className="h-3.5 w-3.5 shrink-0 text-zinc-500 opacity-80" />
+                        <span className="text-[13px] font-medium text-zinc-600 dark:text-zinc-400">{skill.name}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
