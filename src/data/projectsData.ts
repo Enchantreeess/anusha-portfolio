@@ -136,7 +136,7 @@ export const projectsData: Project[] = [
     slug: "unslop",
     title: "Unslop",
     imageTitle: "Feed Scoring",
-    src: "/project-image/Unslop.png",
+    src: "/project-image/unslop-card.png",
     description: "A Chrome extension that flags low-value and AI-slop posts in your LinkedIn feed in real time, scored on-device. No post ever leaves the browser.",
     tech: ["ts", "chrome", "node"],
     github: "https://github.com/Paras-ydv/Unslop",

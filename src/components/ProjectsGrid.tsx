@@ -84,13 +84,15 @@ export const ProjectCard = ({
 
         {/* Floating screenshot sitting directly at the bottom of the outer wrapper */}
         <motion.div
-          className="absolute bottom-0 left-1/2 z-20 h-[78%] w-[85%] origin-bottom rounded-t-[10px] border border-b-0 border-black/5 bg-white p-0 shadow-[0_-8px_30px_rgba(0,0,0,0.06)] dark:border-white/[0.15] dark:bg-[#0a0a0a] dark:shadow-[0_-8px_30px_rgba(0,0,0,0.5)]"
+          className="absolute bottom-0 left-1/2 z-20 h-[74%] w-[85%] origin-bottom rounded-t-[10px] border border-b-0 border-black/5 bg-white p-0 shadow-[0_-8px_30px_rgba(0,0,0,0.06)] dark:border-white/[0.15] dark:bg-[#0a0a0a] dark:shadow-[0_-8px_30px_rgba(0,0,0,0.5)]"
           variants={{
             rest: { y: 0, x: "-50%", scale: 1 },
             hover: { y: 4, x: "-50%", scale: 0.94 },
           }}
           transition={{ duration: 0.2, ease: "easeOut" }}
         >
+          {/* The panel is sized to 1.6 to match the screenshots, so cover fills
+              it exactly - at 1.53 it clipped the left edge of every 16:10 shot. */}
           <div className="size-full overflow-hidden rounded-t-[9px]">
             <Image
               src={imageSrc}
@@ -100,7 +102,7 @@ export const ProjectCard = ({
               preload={isPriority}
               sizes="(min-width: 768px) 17vw, calc(100vw - 2rem)"
               quality={70}
-              className="size-full object-cover"
+              className="size-full object-cover object-top"
             />
           </div>
         </motion.div>
