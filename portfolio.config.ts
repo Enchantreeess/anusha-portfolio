@@ -36,6 +36,19 @@ export const portfolio = {
     codechef: "paras_ydv",
   },
 
+  /**
+   * Guestbook, backed by GitHub Discussions via giscus. Entries live as
+   * comments in your repo, so there is no database and no spam - signing
+   * requires a GitHub account. Get these from giscus.app after installing the
+   * giscus app on the repo. Leave `repoId` empty to hide the guestbook.
+   */
+  giscus: {
+    repo: "Paras-ydv/portfolio" as `${string}/${string}`,
+    repoId: "R_kgDOVMzxpg",
+    category: "Announcements",
+    categoryId: "DIC_kwDOVMzxps4DI0RB",
+  },
+
   /** This site's own source, linked in the footer. Set to "" to hide the link. */
   repo: "https://github.com/Paras-ydv/portfolio",
 

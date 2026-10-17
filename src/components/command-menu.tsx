@@ -26,6 +26,7 @@ import {
     Download,
     CalendarDays,
     Send,
+    MessageSquare,
 } from "lucide-react"
 import { SiGithub, SiX, SiLeetcode, SiCodeforces, SiCodechef } from "react-icons/si"
 import { FaLinkedin } from "react-icons/fa6"
@@ -220,6 +221,10 @@ export function CommandMenu() {
                         <CommandItem value="page anime music rap pop watchlist" onSelect={() => runCommand(() => router.push("/anime"))} className={itemClass}>
                             <Music className="mr-2 h-4 w-4 text-zinc-500" />
                             <span>Anime &amp; Music</span>
+                        </CommandItem>
+                        <CommandItem value="page guestbook notes comments sign" onSelect={() => runCommand(() => router.push("/guestbook"))} className={itemClass}>
+                            <MessageSquare className="mr-2 h-4 w-4 text-zinc-500" />
+                            <span>Guestbook</span>
                         </CommandItem>
                         <CommandItem value="page contact form" onSelect={() => runCommand(() => router.push("/contact"))} className={itemClass}>
                             <Send className="mr-2 h-4 w-4 text-zinc-500" />
