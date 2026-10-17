@@ -54,7 +54,7 @@ const SECTIONS = [
     { id: "skills", label: "Skills", icon: BookOpen, key: "S" },
     { id: "education", label: "Education", icon: GraduationCap, key: null },
     { id: "blogs", label: "Blogs", icon: FileText, key: "B" },
-    { id: "anime", label: "Anime & Rap", icon: Music, key: "A" },
+    { id: "anime", label: "Anime & Music", icon: Music, key: "A" },
     { id: "highlights", label: "Highlights", icon: Sparkles, key: null },
     { id: "contact", label: "Socials", icon: Send, key: null },
 ] as const
@@ -213,9 +213,9 @@ export function CommandMenu() {
                             <Sparkles className="mr-2 h-4 w-4 text-zinc-500" />
                             <span>Highlights archive</span>
                         </CommandItem>
-                        <CommandItem value="page anime rap music watchlist" onSelect={() => runCommand(() => router.push("/anime"))} className={itemClass}>
+                        <CommandItem value="page anime music rap pop watchlist" onSelect={() => runCommand(() => router.push("/anime"))} className={itemClass}>
                             <Music className="mr-2 h-4 w-4 text-zinc-500" />
-                            <span>Anime &amp; Rap</span>
+                            <span>Anime &amp; Music</span>
                         </CommandItem>
                         <CommandItem value="page contact form" onSelect={() => runCommand(() => router.push("/contact"))} className={itemClass}>
                             <Send className="mr-2 h-4 w-4 text-zinc-500" />

@@ -6,27 +6,37 @@ export type Scene = {
 };
 
 /**
- * Seeded across the four scenes Paras named. Once the Spotify connector is
- * authorised this can be replaced with his actual top artists.
+ * Taken from Paras's Spotify (top, followed and saved artists), grouped by
+ * scene. Scene order matters: the homepage teaser samples the first few of each.
  */
 export const musicScenes: Scene[] = [
   {
-    scene: "Indian hip-hop",
-    artists: ["Seedhe Maut", "DIVINE", "KR$NA", "Prabh Deep", "Talha Anjum", "Raftaar", "Karma", "MC Stan"],
+    scene: "Western rap",
+    artists: ["Eminem", "J. Cole", "Travis Scott", "XXXTENTACION", "Nipsey Hussle", "Jack Harlow"],
   },
   {
-    scene: "Western",
-    artists: ["Kendrick Lamar", "J. Cole", "Tyler, the Creator", "Travis Scott", "Eminem", "Drake"],
+    scene: "Desi hip-hop",
+    artists: ["Seedhe Maut", "KR$NA", "Karma", "Prabh Deep", "Raftaar", "Bohemia", "Sikander Kahlon", "Young Stunners"],
   },
   {
-    scene: "Old school",
-    artists: ["Nas", "The Notorious B.I.G.", "2Pac", "Wu-Tang Clan", "Mobb Deep", "A Tribe Called Quest"],
+    scene: "Pop & R&B",
+    artists: ["Taylor Swift", "Gracie Abrams", "Dua Lipa", "Tyla", "ZAYN", "Lana Del Rey", "Selena Gomez", "Ed Sheeran", "Sia", "Maroon 5"],
   },
   {
-    scene: "UK / drill",
-    artists: ["Central Cee", "Dave", "Stormzy", "Headie One"],
+    scene: "Punjabi",
+    artists: ["Sidhu Moose Wala", "Karan Aujla", "Shubh", "AP Dhillon", "Parmish Verma", "Talwiinder"],
+  },
+  {
+    scene: "Haryanvi",
+    artists: ["Dhanda Nyoliwala", "Khasa Aala Chahar", "CHIEF", "Lash Curry"],
   },
 ];
+
+/** Every artist across the scenes, for counts and the homepage teaser. */
+export const allArtists = musicScenes.flatMap((s) => s.artists);
+
+/** A few from each scene, so the homepage teaser shows the spread, not one scene. */
+export const featuredArtists = musicScenes.flatMap((s) => s.artists.slice(0, 3));
 
 /**
  * The track embedded on the page. Swap the id for any Spotify track - it is the

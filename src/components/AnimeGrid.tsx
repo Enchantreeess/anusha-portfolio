@@ -56,7 +56,7 @@ export function AnimeGrid() {
                     alt={item.title}
                     fill
                     sizes="(min-width: 1024px) 16vw, (min-width: 640px) 30vw, 45vw"
-                    quality={72}
+                    quality={70}
                     className="object-cover saturate-[.85] transition-[filter,transform] duration-500 ease-out group-hover:saturate-100 motion-safe:group-hover:scale-[1.03]"
                     draggable={false}
                   />
