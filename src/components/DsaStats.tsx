@@ -69,7 +69,7 @@ function StatCard({
 
         <div className="h-px bg-black/30 dark:bg-white/[0.15]" style={dashedX} />
 
-        <div className="grid grid-cols-2 sm:grid-cols-4 py-1">
+        <div className={`grid grid-cols-2 py-1 ${metrics.length === 5 ? "sm:grid-cols-5" : "sm:grid-cols-4"}`}>
           {metrics.map((m) => (
             <Metric key={m.label} label={m.label} value={m.value} />
           ))}
@@ -149,7 +149,8 @@ export async function DsaStats() {
         href={`https://leetcode.com/u/${handles.leetcode}`}
         stale={lc.stale}
         metrics={[
-          { label: "Contest Rating", value: lc.rating.toLocaleString() },
+          { label: "Rating", value: lc.rating.toLocaleString() },
+          { label: "Peak", value: lc.maxRating.toLocaleString() },
           { label: "Solved", value: lc.solved.all.toLocaleString() },
           { label: "Contest Rank", value: `Top ${lc.topPercentage}%` },
           { label: "Active Days", value: lc.activeDays.toLocaleString() },

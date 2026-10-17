@@ -47,7 +47,7 @@ function buildCalendar(counts, days = 365) {
 }
 
 async function leetcode() {
-  const query = `query u($u:String!){matchedUser(username:$u){username profile{ranking}submitStatsGlobal{acSubmissionNum{difficulty count}}userCalendar{streak totalActiveDays submissionCalendar}}userContestRanking(username:$u){rating globalRanking attendedContestsCount topPercentage}allQuestionsCount{difficulty count}}`;
+  const query = `query u($u:String!){matchedUser(username:$u){username profile{ranking}submitStatsGlobal{acSubmissionNum{difficulty count}}userCalendar{streak totalActiveDays submissionCalendar}}userContestRanking(username:$u){rating globalRanking attendedContestsCount topPercentage}userContestRankingHistory(username:$u){attended rating}allQuestionsCount{difficulty count}}`;
   const res = await fetch("https://leetcode.com/graphql", {
     method: "POST",
     headers: { "Content-Type": "application/json", Referer: "https://leetcode.com", "User-Agent": "Mozilla/5.0" },
@@ -57,6 +57,10 @@ async function leetcode() {
   if (json.errors?.length) throw new Error(json.errors[0].message);
   const user = json.data.matchedUser;
   const contest = json.data.userContestRanking;
+  // No max-rating field exists; derive the peak from attended contests only.
+  const attendedRatings = (json.data.userContestRankingHistory ?? [])
+    .filter((h) => h.attended)
+    .map((h) => h.rating);
   const pick = (list, key) => list.find((b) => b.difficulty.toLowerCase() === key)?.count ?? 0;
 
   const counts = new Map();
@@ -68,6 +72,9 @@ async function leetcode() {
   return {
     username: user.username,
     rating: Math.round(contest?.rating ?? 0),
+    maxRating: attendedRatings.length
+      ? Math.round(Math.max(...attendedRatings))
+      : Math.round(contest?.rating ?? 0),
     globalRanking: contest?.globalRanking ?? 0,
     topPercentage: Number((contest?.topPercentage ?? 0).toFixed(2)),
     contests: contest?.attendedContestsCount ?? 0,

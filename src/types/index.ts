@@ -8,6 +8,8 @@ export type HeatmapDay = {
 export type LeetCodeStats = {
   username: string;
   rating: number;
+  /** Best contest rating ever reached, computed from the full contest history. */
+  maxRating: number;
   globalRanking: number;
   topPercentage: number;
   contests: number;

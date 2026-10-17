@@ -13,6 +13,7 @@ const QUERY = `query u($u: String!) {
   userContestRanking(username: $u) {
     rating globalRanking attendedContestsCount topPercentage
   }
+  userContestRankingHistory(username: $u) { attended rating }
   allQuestionsCount { difficulty count }
 }`;
 
@@ -40,6 +41,14 @@ export function getLeetCode(): Promise<LeetCodeStats> {
     if (!user) throw new Error("leetcode returned no user");
     const contest = json.data?.userContestRanking;
 
+    // LeetCode exposes no "max rating" field, so derive it from every contest
+    // actually attended - unattended entries carry a stale rating.
+    const history: { attended: boolean; rating: number }[] =
+      json.data?.userContestRankingHistory ?? [];
+    const attended = history.filter((h) => h.attended).map((h) => h.rating);
+    const rating = Math.round(contest?.rating ?? 0);
+    const maxRating = attended.length ? Math.round(Math.max(...attended)) : rating;
+
     const pick = (list: Bucket[], key: string) =>
       list.find((b) => b.difficulty.toLowerCase() === key)?.count ?? 0;
 
@@ -55,7 +64,8 @@ export function getLeetCode(): Promise<LeetCodeStats> {
 
     return {
       username: user.username,
-      rating: Math.round(contest?.rating ?? 0),
+      rating,
+      maxRating,
       globalRanking: contest?.globalRanking ?? 0,
       topPercentage: Number((contest?.topPercentage ?? 0).toFixed(2)),
       contests: contest?.attendedContestsCount ?? 0,
