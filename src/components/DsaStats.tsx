@@ -69,7 +69,7 @@ function StatCard({
 
         <div className="h-px bg-black/30 dark:bg-white/[0.15]" style={dashedX} />
 
-        <div className={`grid grid-cols-2 py-1 ${metrics.length === 3 ? "sm:grid-cols-3" : metrics.length === 5 ? "sm:grid-cols-5" : "sm:grid-cols-4"}`}>
+        <div className={`grid py-1 ${metrics.length === 3 ? "grid-cols-3" : metrics.length === 5 ? "grid-cols-2 sm:grid-cols-5" : "grid-cols-2 sm:grid-cols-4"}`}>
           {metrics.map((m) => (
             <Metric key={m.label} label={m.label} value={m.value} />
           ))}
