@@ -97,8 +97,6 @@ export default function AnimePage() {
         <div className="flex flex-wrap items-start gap-x-10 gap-y-4 py-6">
           <Stat value={String(animeStats.total)} label="Titles" />
           <Stat value={animeStats.episodes.toLocaleString()} label="Episodes" />
-          <Stat value={String(animeStats.watching)} label="Watching" />
-          <Stat value={String(animeStats.completed)} label="Completed" />
         </div>
 
         <div className="relative">
