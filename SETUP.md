@@ -39,7 +39,8 @@ fetchers query those accounts directly, so a wrong handle shows wrong stats.
 | `hackathonsData.ts` | `hackathonsData` | Hackathons and placements. |
 | `highlightsData.ts` | `highlightsData` | Proof screenshots. Each needs a real image — see below. |
 | `blogsData.ts` | `blogsData` | Posts. External links need no `slug`; written posts need `slug` + `content`. |
-| `anime.json` / `music.json` | — | Optional personal sections. Delete the `/anime` route if you do not want them. |
+| `anime.json` | — | Optional watchlist. Covers go in `public/anime/`. |
+| `music.json` | `scenes`, `nowPlaying`, `albums` | Optional music section. `scenes` are the artist chips, `nowPlaying` is the embedded Spotify track, `albums` is the cover shelf — run `npm run refresh-music` after editing it. |
 | `stats-snapshot.json` | — | Fallback stats. Regenerate with `npm run refresh-stats`, do not hand-edit. |
 
 **Array order is display order** everywhere. Reordering a section means moving

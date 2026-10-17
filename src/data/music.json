@@ -1,5 +1,71 @@
 {
-  "_comment": "Album order is display order. To add one: paste its Spotify album id (the segment after /album/ in a share link) with artist, year and scene, then run `npm run refresh-music` to fill in title and download the cover.",
+  "_comment": "Array order is display order. Scenes list the artists shown as chips; nowPlaying is the embedded track (the id after /track/ in a Spotify share link). To add an album paste its Spotify album id with artist, year and scene, then run `npm run refresh-music` to fill in title and download the cover.",
+  "scenes": [
+    {
+      "scene": "Western rap",
+      "artists": [
+        "Eminem",
+        "J. Cole",
+        "Travis Scott",
+        "XXXTENTACION",
+        "Nipsey Hussle",
+        "Jack Harlow"
+      ]
+    },
+    {
+      "scene": "Desi hip-hop",
+      "artists": [
+        "Seedhe Maut",
+        "KR$NA",
+        "Karma",
+        "Prabh Deep",
+        "Raftaar",
+        "Bohemia",
+        "Sikander Kahlon",
+        "Young Stunners"
+      ]
+    },
+    {
+      "scene": "Pop & R&B",
+      "artists": [
+        "Taylor Swift",
+        "Gracie Abrams",
+        "Dua Lipa",
+        "Tyla",
+        "ZAYN",
+        "Lana Del Rey",
+        "Selena Gomez",
+        "Ed Sheeran",
+        "Sia",
+        "Maroon 5"
+      ]
+    },
+    {
+      "scene": "Punjabi",
+      "artists": [
+        "Sidhu Moose Wala",
+        "Karan Aujla",
+        "Shubh",
+        "AP Dhillon",
+        "Parmish Verma",
+        "Talwiinder"
+      ]
+    },
+    {
+      "scene": "Haryanvi",
+      "artists": [
+        "Dhanda Nyoliwala",
+        "Khasa Aala Chahar",
+        "CHIEF",
+        "Lash Curry"
+      ]
+    }
+  ],
+  "nowPlaying": {
+    "trackId": "6HZILIRieu8S0iqY8kIKhj",
+    "title": "DNA.",
+    "artist": "Kendrick Lamar"
+  },
   "albums": [
     {
       "id": "4otkd9As6YaxxEkIjXPiZ6",
