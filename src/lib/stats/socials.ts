@@ -1,4 +1,5 @@
 import { handles } from "@/data/links";
+import { portfolio } from "~/portfolio.config";
 import { REVALIDATE, requestTimeout, withFallback } from "./shared";
 import { getLeetCode } from "./leetcode";
 
@@ -14,18 +15,14 @@ export type SocialProfileData = {
 };
 
 const AVATAR = `https://github.com/${handles.github}.png`;
-const LOCATION = "Bengaluru, India (UTC +05:30)";
+const LOCATION = `${portfolio.location} (${portfolio.utcOffset})`;
 
 /**
  * X killed its public follower endpoint and LinkedIn answers every
  * unauthenticated request with HTTP 999, so neither count can be fetched.
- * Put the real numbers here and they appear on the hover cards; leave them
- * null and the cards simply show no stat row rather than a made-up figure.
+ * Set real numbers in `portfolio.config.ts` to show them.
  */
-const FOLLOWERS: { x: number | null; linkedin: number | null } = {
-  x: null,
-  linkedin: null,
-};
+const FOLLOWERS = portfolio.followers;
 
 /** GitHub's REST API is public, so repo and follower counts are always current. */
 function getGithubProfile() {
@@ -38,10 +35,10 @@ function getGithubProfile() {
     if (!res.ok) throw new Error(`github http ${res.status}`);
     const d = await res.json();
     return {
-      name: d.name || "Paras",
+      name: d.name || portfolio.name,
       handle: handles.github,
       avatar: AVATAR,
-      bio: d.bio || "Concurrent systems, backend services, and production AI/ML",
+      bio: d.bio || portfolio.bios.github,
       location: LOCATION,
       stats: [
         { value: String(d.public_repos ?? 0), label: "Repositories" },
@@ -49,10 +46,10 @@ function getGithubProfile() {
       ],
     };
   }, {
-    name: "Paras",
+    name: portfolio.name,
     handle: handles.github,
     avatar: AVATAR,
-    bio: "Concurrent systems, backend services, and production AI/ML",
+    bio: portfolio.bios.github,
     location: LOCATION,
     stats: [],
   });
@@ -78,7 +75,7 @@ function getXProfile() {
       .replace(/&amp;/g, "&")
       .replace(/&quot;/g, '"');
     return {
-      name: "Paras",
+      name: portfolio.name,
       handle: `@${handles.x}`,
       avatar: AVATAR,
       bio,
@@ -87,10 +84,10 @@ function getXProfile() {
       stats: FOLLOWERS.x ? [{ value: FOLLOWERS.x.toLocaleString(), label: "Followers" }] : [],
     };
   }, {
-    name: "Paras",
+    name: portfolio.name,
     handle: `@${handles.x}`,
     avatar: AVATAR,
-    bio: "GSoC'26 Catrobat | SDE Intern @GoCreditAI | Ex-NatWest, Samsung | LeetCode Knight",
+    bio: portfolio.bios.x,
     location: LOCATION,
     banner: true,
     stats: [],
@@ -100,7 +97,7 @@ function getXProfile() {
 async function getLeetCodeProfile(): Promise<SocialProfileData> {
   const lc = await getLeetCode();
   return {
-    name: "Paras",
+    name: portfolio.name,
     handle: `u/${lc.username}`,
     avatar: AVATAR,
     bio: `Knight · ${lc.solved.all.toLocaleString()} solved · ${lc.contests} contests`,
@@ -120,11 +117,11 @@ async function getLeetCodeProfile(): Promise<SocialProfileData> {
  */
 function getLinkedInProfile(): SocialProfileData {
   return {
-    name: "Paras",
+    name: portfolio.name,
     handle: `in/${handles.linkedin}`,
     avatar: AVATAR,
-    bio: "GSoC'26 Catrobat | SDE Intern at GoCredit AI | Ex-NatWest, Samsung R&D, Carver Agents",
-    location: "Bengaluru, Karnataka, India",
+    bio: portfolio.bios.linkedin,
+    location: portfolio.location,
     banner: true,
     stats: FOLLOWERS.linkedin
       ? [{ value: FOLLOWERS.linkedin.toLocaleString(), label: "Followers" }]
