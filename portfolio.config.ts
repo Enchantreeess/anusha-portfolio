@@ -36,6 +36,9 @@ export const portfolio = {
     codechef: "paras_ydv",
   },
 
+  /** This site's own source, linked in the footer. Set to "" to hide the link. */
+  repo: "https://github.com/Paras-ydv/portfolio",
+
   email: "parasydv77@gmail.com",
   /** Path under /public. Swap the file and this string together. */
   resume: "/Paras_Resume.pdf",

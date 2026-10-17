@@ -22,7 +22,7 @@ import { FlipCoverButton } from "@/components/pixel-perfect/flip-cover-button";
 import SocialHoverCard from "@/components/pixel-perfect/social-hover-card";
 import { BannerParticles } from "@/components/BannerParticles";
 import Image from "next/image";
-import { SiLeetcode } from "react-icons/si";
+import { SiGithub, SiLeetcode } from "react-icons/si";
 
 
 const lightBannerPlaceholder =
@@ -577,6 +577,21 @@ export default async function Home() {
             </div>
           </div>
         </div>
+
+        {/* Source link - this site is MIT licensed and meant to be forked */}
+        {portfolio.repo && (
+          <div className="flex items-center justify-center pb-6">
+            <a
+              href={portfolio.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2 rounded-[6px] border border-black/5 bg-zinc-50 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-zinc-400 transition-colors hover:text-zinc-700 dark:border-white/5 dark:bg-[#09090b] dark:text-zinc-600 dark:hover:text-zinc-300"
+            >
+              <SiGithub className="h-3 w-3" aria-hidden="true" />
+              Source on GitHub
+            </a>
+          </div>
+        )}
 
         {/* Fading Grid Filler */}
         <div className="flex-grow w-[calc(100%+32px)] -mx-4 h-[300px] relative mt-4">
