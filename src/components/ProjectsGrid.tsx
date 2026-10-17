@@ -84,7 +84,7 @@ export const ProjectCard = ({
 
         {/* Floating screenshot sitting directly at the bottom of the outer wrapper */}
         <motion.div
-          className="absolute bottom-0 left-1/2 z-20 h-[74%] w-[85%] origin-bottom rounded-t-[10px] border border-b-0 border-black/5 bg-white p-0 shadow-[0_-8px_30px_rgba(0,0,0,0.06)] dark:border-white/[0.15] dark:bg-[#0a0a0a] dark:shadow-[0_-8px_30px_rgba(0,0,0,0.5)]"
+          className="absolute bottom-0 left-1/2 z-20 h-[66%] w-[85%] origin-bottom sm:h-[74%] rounded-t-[10px] border border-b-0 border-black/5 bg-white p-0 shadow-[0_-8px_30px_rgba(0,0,0,0.06)] dark:border-white/[0.15] dark:bg-[#0a0a0a] dark:shadow-[0_-8px_30px_rgba(0,0,0,0.5)]"
           variants={{
             rest: { y: 0, x: "-50%", scale: 1 },
             hover: { y: 4, x: "-50%", scale: 0.94 },
