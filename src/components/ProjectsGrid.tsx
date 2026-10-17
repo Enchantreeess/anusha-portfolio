@@ -42,10 +42,12 @@ export const ProjectCard = ({
   const statusColor =
     project.status === "research" ? "bg-sky-500"
     : project.status === "building" ? "bg-red-500"
+    : project.status === "archived" ? "bg-zinc-400 dark:bg-zinc-500"
     : "bg-emerald-500";
   const statusLabel =
     project.status === "research" ? "Research"
     : project.status === "building" ? "Building"
+    : project.status === "archived" ? "Archived"
     : "Live";
 
   return (

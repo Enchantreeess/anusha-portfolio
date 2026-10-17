@@ -39,7 +39,7 @@ export type TechKey =
 
 export type TechItem = TechKey | { label: string; tooltip?: string; };
 
-export type ProjectStatus = "live" | "building" | "research";
+export type ProjectStatus = "live" | "building" | "research" | "archived";
 
 export interface Project {
   slug: string;
@@ -50,7 +50,8 @@ export interface Project {
   description: string;
   tech: TechItem[];
   github: string;
-  live: string;
+  /** Omit when there is nothing working to link to. */
+  live?: string;
   status: ProjectStatus;
   starsText?: string;
   backgroundImage?: string;
@@ -98,11 +99,10 @@ export const projectsData: Project[] = [
     title: "CampusQuest",
     imageTitle: "Campus Engine",
     src: "/project-image/campusquest-ui.png",
-    description: "Databricks Hackathon finalist. A campus career engine with a what-if skill simulator, quests and XP, gap-based people matching, and Ask Genie over campus data.",
+    description: "Databricks Hackathon finalist. A campus career engine with a what-if skill simulator, quests and XP, gap-based people matching, and Ask Genie over campus data. The Databricks workspace was decommissioned after the event, so the demo is offline and the code is the record.",
     tech: ["next", "supabase", "databricks", "ts", "postgres"],
     github: "https://github.com/Paras-ydv/CampusQuest",
-    live: "https://campusquest-gamma.vercel.app",
-    status: "live",
+    status: "archived",
     backgroundImage: "/project-hover-campusquest.webp",
     hasPin: true,
   },

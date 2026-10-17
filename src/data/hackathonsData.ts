@@ -43,7 +43,6 @@ export const hackathonsData: Hackathon[] = [
     ],
     links: [
       { label: "Repository", href: "https://github.com/Paras-ydv/CampusQuest" },
-      { label: "Live", href: "https://campusquest-gamma.vercel.app" },
     ],
   },
   {
