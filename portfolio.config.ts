@@ -38,7 +38,7 @@ export const portfolio = {
 
   email: "parasydv77@gmail.com",
   /** Path under /public. Swap the file and this string together. */
-  resume: "/Resume_Paras.pdf",
+  resume: "/Paras_Resume.pdf",
   /** "Book an intro call" button. Set to "" to hide it. */
   bookingLink: "https://cal.com/parascodes/30min",
 
@@ -75,8 +75,8 @@ export const portfolio = {
    * Put real numbers here to show them, or leave null to show no stat row.
    */
   followers: {
-    x: null as number | null,
-    linkedin: null as number | null,
+    x: "1K+" as string | null,
+    linkedin: "5K+" as string | null,
   },
 } as const;
 
