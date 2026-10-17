@@ -57,10 +57,10 @@ const SECTIONS = [
     { id: "hackathons", label: "Hackathons", icon: Trophy, key: "H" },
     { id: "dsa", label: "DSA / CP", icon: Binary, key: "D" },
     { id: "skills", label: "Skills", icon: BookOpen, key: "S" },
-    { id: "education", label: "Education", icon: GraduationCap, key: null },
+    { id: "education", label: "Education", icon: GraduationCap, key: "G" },
     { id: "anime", label: "Anime & Music", icon: Music, key: "A" },
-    { id: "highlights", label: "Highlights", icon: Sparkles, key: null },
-    { id: "contact", label: "Socials", icon: Send, key: null },
+    { id: "highlights", label: "Highlights", icon: Sparkles, key: "L" },
+    { id: "contact", label: "Socials", icon: Send, key: "O" },
 ] as const
 
 const PROFILES = [
