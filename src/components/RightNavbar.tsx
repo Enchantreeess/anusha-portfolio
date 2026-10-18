@@ -61,20 +61,26 @@ export function RightNavbar() {
       style={{ width: 'calc(100vw - var(--removed-body-scroll-bar-size, 0px))' }}
     >
       <nav className="absolute top-[22vh] left-[calc(69%+32px)] pointer-events-auto flex flex-col gap-4 mt-2">
-        <h3 className="text-[10px] font-bold tracking-[0.2em] text-zinc-400 dark:text-zinc-600 uppercase mb-1">Index</h3>
+        <h3 className="text-[10px] font-bold tracking-[0.2em] text-zinc-500 dark:text-zinc-500 uppercase mb-1">Index</h3>
         {links.map((link) => {
           const isActive = activeSection === link.href.slice(1);
           return (
             <Link
               key={link.name}
               href={link.href}
+              // Inactive sits at zinc-500 in both themes. It used to be
+              // zinc-600 on black (2.7:1) against an active link at 16.6:1 - a
+              // six-fold gap that made the list that is meant to be scannable
+              // the hardest thing on the page to read. zinc-500 clears AA in
+              // light (4.8:1), lands at 4.4:1 in dark, and still reads as
+              // clearly subordinate to the active entry.
               className={`text-[12px] font-medium tracking-[0.05em] transition-all duration-300 ease-out flex items-center gap-3 ${isActive
                   ? "text-zinc-800 dark:text-zinc-200"
-                  : "text-zinc-400 dark:text-zinc-600 hover:text-zinc-600 dark:hover:text-zinc-400"
+                  : "text-zinc-500 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
                 }`}
             >
               <span className={`h-[1px] transition-all duration-300 ease-out ${isActive
-                  ? "w-3 bg-zinc-300 dark:bg-zinc-700"
+                  ? "w-3 bg-zinc-400 dark:bg-zinc-600"
                   : "w-0 bg-transparent"
                 }`} />
               {link.name}
