@@ -57,7 +57,14 @@ export function Guestbook() {
     let lastTotal: number | undefined;
     const onMessage = (event: MessageEvent) => {
       if (event.origin !== GISCUS_ORIGIN) return;
-      const total = event.data?.giscus?.discussion?.totalCommentCount;
+      const giscus = event.data?.giscus;
+      // The metadata message always carries a `discussion` key, but it is null
+      // once the thread has no comments left. Reading totalCommentCount off it
+      // and bailing when the result is not a number meant deleting the last
+      // note never pinged - the one case where the homepage is most obviously
+      // wrong. Treat "discussion present but empty" as a count of zero.
+      if (!giscus || !("discussion" in giscus)) return;
+      const total = giscus.discussion?.totalCommentCount ?? 0;
       if (typeof total !== "number" || total === lastTotal) return;
       lastTotal = total;
       fetch("/api/guestbook", { method: "POST" }).catch(() => {});
