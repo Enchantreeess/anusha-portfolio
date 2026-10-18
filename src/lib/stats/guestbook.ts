@@ -12,6 +12,9 @@ export type GuestbookNote = {
 
 export type GuestbookData = { notes: GuestbookNote[]; total: number; stale: boolean };
 
+/** Cache tag on the discussion fetch, so a new note can invalidate it on demand. */
+export const GUESTBOOK_TAG = "guestbook";
+
 const QUERY = `query g($owner: String!, $name: String!, $number: Int!) {
   repository(owner: $owner, name: $name) {
     discussion(number: $number) {
@@ -43,7 +46,9 @@ type Node = {
  * unauthenticated requests even for public data.
  *
  * Shorter revalidate than the stats cards - a guestbook that takes six hours to
- * show your note feels broken to whoever just signed it.
+ * show your note feels broken to whoever just signed it. The 600s is only the
+ * backstop: /api/guestbook drops the cache as soon as the giscus widget reports
+ * a comment count this cache has not seen.
  */
 export function getGuestbook(discussionNumber = 1): Promise<GuestbookData> {
   return withFallback<GuestbookData>(
@@ -60,7 +65,7 @@ export function getGuestbook(discussionNumber = 1): Promise<GuestbookData> {
           query: QUERY,
           variables: { owner, name, number: discussionNumber },
         }),
-        next: { revalidate: 600 },
+        next: { revalidate: 600, tags: [GUESTBOOK_TAG] },
         signal: requestTimeout(),
       });
       if (!res.ok) throw new Error(`guestbook http ${res.status}`);
@@ -88,4 +93,34 @@ export function getGuestbook(discussionNumber = 1): Promise<GuestbookData> {
     },
     { notes: [], total: 0 },
   );
+}
+
+/**
+ * The discussion's comment count straight from GitHub, skipping every cache.
+ * Lets /api/guestbook check that a "new note" ping is real before it throws
+ * away the cached homepage, so the endpoint cannot be used to force rebuilds.
+ */
+export async function getLiveGuestbookTotal(discussionNumber = 1): Promise<number> {
+  const token = process.env.GITHUB_TOKEN;
+  if (!token) throw new Error("GITHUB_TOKEN is not set");
+
+  const [owner, name] = portfolio.giscus.repo.split("/");
+  const res = await fetch("https://api.github.com/graphql", {
+    method: "POST",
+    headers: { Authorization: `bearer ${token}`, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `query g($owner: String!, $name: String!, $number: Int!) {
+        repository(owner: $owner, name: $name) {
+          discussion(number: $number) { comments { totalCount } }
+        }
+      }`,
+      variables: { owner, name, number: discussionNumber },
+    }),
+    cache: "no-store",
+    signal: requestTimeout(),
+  });
+  if (!res.ok) throw new Error(`guestbook http ${res.status}`);
+
+  const json = await res.json();
+  return json.data?.repository?.discussion?.comments?.totalCount ?? 0;
 }

@@ -35,7 +35,9 @@ export function Guestbook() {
       term: "guestbook",
       strict: "0",
       "reactions-enabled": "1",
-      "emit-metadata": "0",
+      // Metadata carries the comment count, which tells the homepage cache
+      // when a new note has landed (see the message listener below).
+      "emit-metadata": "1",
       "input-position": "top",
       theme,
       lang: "en",
@@ -46,6 +48,22 @@ export function Guestbook() {
     // The script is only read on first load; the theme effect below handles
     // later changes, so this deliberately does not depend on `theme`.
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // giscus posts the discussion's metadata on load and again after every new
+  // comment. Each new count is handed to /api/guestbook, which refreshes the
+  // homepage's cached notes if they are behind.
+  useEffect(() => {
+    let lastTotal: number | undefined;
+    const onMessage = (event: MessageEvent) => {
+      if (event.origin !== GISCUS_ORIGIN) return;
+      const total = event.data?.giscus?.discussion?.totalCommentCount;
+      if (typeof total !== "number" || total === lastTotal) return;
+      lastTotal = total;
+      fetch("/api/guestbook", { method: "POST" }).catch(() => {});
+    };
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
   }, []);
 
   useEffect(() => {
