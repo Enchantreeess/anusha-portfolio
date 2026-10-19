@@ -11,25 +11,22 @@ export const contentType = "image/png";
 
 /**
  * Generated rather than committed, so a fork gets its own card from
- * `portfolio.config.ts` and its own data files without opening a design tool.
+ * `portfolio.config.ts` and its own assets without opening a design tool.
  *
- * A link preview is rendered small - X shows it around 500px wide - so this is
- * built around three things that survive that: a face, the name, and four
- * numbers. The numbers come from the committed snapshot rather than a live
- * fetch: this route is prerendered at build time, and a card that depends on
- * three third-party APIs being up is a card that sometimes does not exist.
+ * Built on the site's own hero artwork rather than a flat panel: a link
+ * preview competes with everything else in a feed, and a picture wins where a
+ * dark rectangle of text does not. The text sits on the left, over a gradient
+ * scrim, because the artwork's subject is on the right.
  *
- * ImageResponse renders through Satori: flexbox only, no CSS grid, and every
- * element with more than one child needs an explicit `display: flex`.
- * `radial-gradient` is not supported either - the previous version's dot grid
- * silently rendered as flat black.
+ * ImageResponse renders through Satori: flexbox only, no CSS grid, every
+ * element with more than one child needs an explicit `display: flex`, and
+ * `radial-gradient` is unsupported (`linear-gradient` works).
  */
 
 /**
  * The media type read from the file's magic bytes, not its extension.
  * `public/avatar.png` is in fact a JPEG - browsers sniff and render it anyway,
- * but Satori trusts the data URI's declared type and silently drew nothing,
- * leaving an empty ring on the card. A fork's avatar may be mislabelled too.
+ * but Satori trusts the data URI's declared type and silently draws nothing.
  */
 function sniff(buf: Buffer): string | null {
   if (buf.subarray(0, 8).toString("hex") === "89504e470d0a1a0a") return "image/png";
@@ -40,39 +37,36 @@ function sniff(buf: Buffer): string | null {
   return null;
 }
 
-/**
- * Inlined as a data URI because Satori cannot read `/avatar.png` the way the
- * browser can - it has no origin to resolve a root-relative path against.
- */
-const avatar = (() => {
+/** Inlined: Satori has no origin to resolve a root-relative path against. */
+function embed(file: string): string | null {
   try {
-    const file = fs.readFileSync(path.join(process.cwd(), "public", "avatar.png"));
-    const type = sniff(file);
-    return type ? `data:${type};base64,${file.toString("base64")}` : null;
+    const buf = fs.readFileSync(path.join(process.cwd(), "public", file));
+    const type = sniff(buf);
+    return type ? `data:${type};base64,${buf.toString("base64")}` : null;
   } catch {
     return null;
   }
-})();
+}
 
-const C = {
-  bg: "#09090b",
-  ink: "#fafafa",
-  mute: "#a1a1aa",
-  dim: "#71717a",
-  line: "rgba(255,255,255,0.09)",
-  tile: "rgba(255,255,255,0.03)",
-  accent: "#d6242b",
-};
+const banner = embed("banner-dark.jpg");
+const avatar = embed("avatar.png");
+
+/**
+ * The artwork is 3:1 and the card is 1.9:1, so it is scaled to the card's
+ * height and slid left - keeping the figure on the right and clearing the
+ * left side for type.
+ */
+const ART = { w: 1887, h: 630, left: -546 };
 
 const n = (v: number) => v.toLocaleString("en-US");
 
-/** The four figures worth reading at thumbnail size. */
-const STATS: { value: string; label: string }[] = [
-  { value: String(experiences.length), label: "ROLES" },
-  { value: "GSoC '26", label: "OPEN SOURCE" },
-  { value: n(snapshot.leetcode.maxRating), label: "LEETCODE PEAK" },
-  { value: n(snapshot.codeforces.maxRating), label: "CODEFORCES" },
-];
+/** One restrained line of proof - the artwork does the attracting. */
+const PROOF = [
+  "GSoC '26",
+  `${experiences.length} roles`,
+  `${n(snapshot.leetcode.maxRating)} LeetCode`,
+  `${n(snapshot.codeforces.maxRating)} Codeforces`,
+].join("   ·   ");
 
 export default function OpengraphImage() {
   return new ImageResponse(
@@ -82,92 +76,127 @@ export default function OpengraphImage() {
           width: "100%",
           height: "100%",
           display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          background: C.bg,
-          backgroundImage: `linear-gradient(135deg, #111113 0%, ${C.bg} 55%)`,
-          padding: "60px 64px",
+          position: "relative",
+          background: "#070b16",
           fontFamily: "sans-serif",
+          overflow: "hidden",
         }}
       >
-        {/* face + name: the part that reads at any size */}
-        <div style={{ display: "flex", alignItems: "center", gap: 34 }}>
-          {avatar && (
-            <img
-              src={avatar}
-              width={146}
-              height={146}
-              style={{ borderRadius: 73, border: `2px solid ${C.line}` }}
-            />
-          )}
-          <div style={{ display: "flex", flexDirection: "column" }}>
+        {banner && (
+          <img
+            src={banner}
+            width={ART.w}
+            height={ART.h}
+            style={{ position: "absolute", left: ART.left, top: 0 }}
+          />
+        )}
+
+        {/* scrim: dense behind the type, clear over the figure. Explicit
+            width/height - Satori ignores the `inset` shorthand. */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: size.width,
+            height: size.height,
+            display: "flex",
+            backgroundImage:
+              "linear-gradient(90deg, rgba(4,7,14,0.90) 0%, rgba(4,7,14,0.72) 34%, rgba(4,7,14,0.26) 66%, rgba(4,7,14,0.00) 100%)",
+          }}
+        />
+        {/* a second pass down the frame: the flower field at the bottom is the
+            brightest part of the art and the url sits on top of it. */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: size.width,
+            height: size.height,
+            display: "flex",
+            backgroundImage:
+              "linear-gradient(180deg, rgba(4,7,14,0.14) 0%, rgba(4,7,14,0.0) 44%, rgba(4,7,14,0.38) 100%)",
+          }}
+        />
+
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: size.width,
+            height: size.height,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            padding: "58px 64px",
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
+            {avatar && (
+              <img
+                src={avatar}
+                width={84}
+                height={84}
+                style={{ borderRadius: 42, border: "2px solid rgba(255,255,255,0.22)" }}
+              />
+            )}
             <div
               style={{
                 fontSize: 19,
                 letterSpacing: 5,
-                color: C.dim,
+                color: "rgba(255,255,255,0.62)",
               }}
             >
               {portfolio.location.toUpperCase()}
             </div>
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column", maxWidth: 820 }}>
             <div
               style={{
-                fontSize: 86,
+                fontSize: 94,
                 fontWeight: 700,
-                color: C.ink,
-                letterSpacing: -2,
-                marginTop: 8,
+                color: "#ffffff",
+                letterSpacing: -2.5,
                 lineHeight: 1,
+                textShadow: "0 2px 26px rgba(0,0,0,0.65)",
               }}
             >
               {portfolio.name}
             </div>
-          </div>
-        </div>
-
-        <div
-          style={{
-            fontSize: 31,
-            color: C.mute,
-            lineHeight: 1.35,
-            maxWidth: 1010,
-          }}
-        >
-          {portfolio.tagline}
-        </div>
-
-        {/* the proof */}
-        <div style={{ display: "flex", gap: 14 }}>
-          {STATS.map((s) => (
             <div
-              key={s.label}
               style={{
-                display: "flex",
-                flexDirection: "column",
-                flex: 1,
-                padding: "18px 22px",
-                borderRadius: 14,
-                border: `1px solid ${C.line}`,
-                background: C.tile,
+                fontSize: 30,
+                color: "rgba(255,255,255,0.84)",
+                lineHeight: 1.35,
+                marginTop: 18,
+                textShadow: "0 1px 14px rgba(0,0,0,0.7)",
               }}
             >
-              <div style={{ fontSize: 40, fontWeight: 700, color: C.ink, lineHeight: 1.1 }}>
-                {s.value}
-              </div>
-              <div style={{ fontSize: 16, letterSpacing: 2, color: C.dim, marginTop: 8 }}>
-                {s.label}
+              {portfolio.tagline}
+            </div>
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column", marginTop: 8 }}>
+            <div
+              style={{
+                fontSize: 22,
+                letterSpacing: 1,
+                color: "rgba(255,255,255,0.78)",
+                textShadow: "0 1px 12px rgba(0,0,0,0.7)",
+              }}
+            >
+              {PROOF}
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 20, marginTop: 22 }}>
+              <div style={{ height: 4, width: 52, background: "#d6242b", borderRadius: 2 }} />
+              <div style={{ fontSize: 26, color: "#ffffff" }}>
+                {portfolio.url.replace(/^https?:\/\//, "")}
               </div>
             </div>
-          ))}
-        </div>
-
-        <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
-          <div style={{ height: 4, width: 54, background: C.accent, borderRadius: 2 }} />
-          <div style={{ fontSize: 25, color: C.mute }}>
-            {portfolio.url.replace(/^https?:\/\//, "")}
           </div>
-          <div style={{ display: "flex", flex: 1 }} />
-          <div style={{ fontSize: 25, color: C.dim }}>{`@${portfolio.handles.x}`}</div>
         </div>
       </div>
     ),
