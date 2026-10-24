@@ -56,7 +56,7 @@ blocks in the file; no code changes.
 | `anime/`, `music/`, `blog-images/` | Covers for the optional sections. |
 
 Replace `public/Resume_Paras.pdf` with your own and update `resume` in the
-config. Swap `banner-light.jpg` / `banner-dark.jpg` for the header artwork.
+config. Swap `banner-light.jpg` / `banner-dark-new.jpg` for the header artwork.
 
 **Rename files when you replace them.** Next's image optimiser caches by path,
 so reusing a filename serves the old picture long after the file changed.

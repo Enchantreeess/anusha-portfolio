@@ -6,14 +6,14 @@ import { CommandMenu } from "@/components/command-menu";
 import { CurrentTime } from "@/components/CurrentTime";
 import { FooterBackground } from "@/components/FooterBackground";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { AnimeGrid } from "@/components/AnimeGrid";
-import { animeList, animeStats } from "@/data/animeData";
+import { MoviesGrid } from "@/components/MoviesGrid";
+import { movieStats } from "@/data/moviesData";
 import { albums, musicScenes, nowPlaying } from "@/data/musicData";
 import { portfolio } from "~/portfolio.config";
 
 export const metadata: Metadata = {
-  title: `Anime & Music | ${portfolio.name}`,
-  description: `Everything ${portfolio.name} has watched, and what is on repeat while building.`,
+  title: `Movies & Music | ${portfolio.name}`,
+  description: `Favourite movies, watched films, and music.`,
 };
 
 const horizontalDots = {
@@ -79,9 +79,9 @@ export default function AnimePage() {
             </Link>
             <div className="flex flex-col justify-center">
               <h1 className="mb-0.5 text-[20px] font-bold leading-none tracking-tight text-zinc-800 [text-shadow:-1.5px_0_0_rgba(0,200,255,0.3),1.5px_0_0_rgba(255,80,0,0.3)] dark:text-zinc-100 dark:[text-shadow:-1.5px_0_0_rgba(0,200,255,0.6),1.5px_0_0_rgba(255,80,0,0.6)] sm:text-[24px]">
-                Anime &amp; Music
+                Movies &amp;  Music
               </h1>
-              <p className="text-[12px] text-zinc-500 dark:text-zinc-400">What I watch, and what is on repeat</p>
+              <p className="text-[12px] text-zinc-500 dark:text-zinc-400">Films I love, and music on repeat</p>
             </div>
           </div>
 
@@ -95,9 +95,9 @@ export default function AnimePage() {
       <main className="relative z-10 ml-0 mr-0 flex flex-col px-4 pb-16 pt-[calc(22vh+112px)] md:ml-[30%] md:mr-[30%]">
         {/* stats */}
         <div className="flex flex-wrap items-start gap-x-10 gap-y-4 py-6">
-          <Stat value={String(animeStats.total)} label="Titles" />
-          <Stat value={animeStats.episodes.toLocaleString()} label="Episodes" />
-        </div>
+  <Stat value={String(movieStats.favorites)} label="Favourite Movies" />
+  <Stat value={String(movieStats.watched)} label="Watched" />
+</div>
 
         <div className="relative">
           <div className="pointer-events-none absolute -left-[100vw] -right-[100vw] bottom-0 h-0 border-b border-black/30 dark:border-white/[0.15]" style={horizontalDots} />
@@ -105,15 +105,17 @@ export default function AnimePage() {
           <div className="pointer-events-none absolute -bottom-px -right-4 z-10 h-[2px] w-[2px] bg-black/50 dark:bg-white/[0.25]" />
         </div>
 
-        {/* anime */}
-        <div className="flex items-center justify-between gap-4 py-5">
-          <h2 className="text-[15px] font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Anime</h2>
-          <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-400 dark:text-zinc-600">
-            {String(animeList.length).padStart(2, "0")} titles
-          </span>
-        </div>
+        {/* movies */}
+<div className="flex items-center justify-between gap-4 py-5">
+  <h2 className="text-[15px] font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+    Movies
+  </h2>
+  <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-400 dark:text-zinc-600">
+    {String(movieStats.total).padStart(2, "0")} titles
+  </span>
+</div>
 
-        <AnimeGrid />
+<MoviesGrid />
 
         {/* music */}
         <div className="relative mt-12">

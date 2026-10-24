@@ -1,3 +1,4 @@
+
 import fs from "node:fs";
 import path from "node:path";
 import { ImageResponse } from "next/og";
@@ -11,50 +12,52 @@ export const contentType = "image/png";
 
 /**
  * Generated rather than committed, so a fork gets its own card from
- * `portfolio.config.ts` and its own assets without opening a design tool.
+ * portfolio.config.ts and its own assets without opening a design tool.
  *
- * Built on the site's own hero artwork rather than a flat panel: a link
- * preview competes with everything else in a feed, and a picture wins where a
- * dark rectangle of text does not. The text sits on the left, over a gradient
- * scrim, because the artwork's subject is on the right.
- *
- * ImageResponse renders through Satori: flexbox only, no CSS grid, every
- * element with more than one child needs an explicit `display: flex`, and
- * `radial-gradient` is unsupported (`linear-gradient` works).
- */
-
-/**
- * The media type read from the file's magic bytes, not its extension.
- * `public/avatar.png` is in fact a JPEG - browsers sniff and render it anyway,
- * but Satori trusts the data URI's declared type and silently draws nothing.
+ * Built on the site's own hero artwork rather than a flat panel.
  */
 function sniff(buf: Buffer): string | null {
-  if (buf.subarray(0, 8).toString("hex") === "89504e470d0a1a0a") return "image/png";
-  if (buf.subarray(0, 3).toString("hex") === "ffd8ff") return "image/jpeg";
-  if (buf.subarray(0, 4).toString("ascii") === "RIFF" && buf.subarray(8, 12).toString("ascii") === "WEBP")
+  if (buf.subarray(0, 8).toString("hex") === "89504e470d0a1a0a")
+    return "image/png";
+
+  if (buf.subarray(0, 3).toString("hex") === "ffd8ff")
+    return "image/jpeg";
+
+  if (
+    buf.subarray(0, 4).toString("ascii") === "RIFF" &&
+    buf.subarray(8, 12).toString("ascii") === "WEBP"
+  )
     return "image/webp";
-  if (buf.subarray(0, 4).toString("ascii") === "GIF8") return "image/gif";
+
+  if (buf.subarray(0, 4).toString("ascii") === "GIF8")
+    return "image/gif";
+
   return null;
 }
 
 /** Inlined: Satori has no origin to resolve a root-relative path against. */
 function embed(file: string): string | null {
   try {
-    const buf = fs.readFileSync(path.join(process.cwd(), "public", file));
+    const buf = fs.readFileSync(
+      path.join(process.cwd(), "public", file)
+    );
+
     const type = sniff(buf);
-    return type ? `data:${type};base64,${buf.toString("base64")}` : null;
+
+    return type
+      ? `data:${type};base64,${buf.toString("base64")}`
+      : null;
   } catch {
     return null;
   }
 }
 
-const banner = embed("banner-dark.jpg");
+const banner = embed("banner-dark-new.jpg");
 const avatar = embed("avatar.png");
 
 /**
- * The artwork is 3:1 and the card is 1.9:1, so it is scaled to the card's
- * height and slid left - keeping the figure on the right and clearing the
- * left side for type.
+ * The artwork is 3:1 and the card is 1.9:1,
+ * so it is scaled to the card's height and slid left.
  */
 const ART = { w: 1887, h: 630, left: -546 };
 
@@ -64,8 +67,7 @@ const n = (v: number) => v.toLocaleString("en-US");
 const PROOF = [
   "GSoC '26",
   `${experiences.length} roles`,
-  `${n(snapshot.leetcode.maxRating)} LeetCode`,
-  `${n(snapshot.codeforces.maxRating)} Codeforces`,
+  `${n(snapshot.leetcode?.maxRating ?? 0)} LeetCode`,
 ].join("   ·   ");
 
 export default function OpengraphImage() {
@@ -87,12 +89,15 @@ export default function OpengraphImage() {
             src={banner}
             width={ART.w}
             height={ART.h}
-            style={{ position: "absolute", left: ART.left, top: 0 }}
+            style={{
+              position: "absolute",
+              left: ART.left,
+              top: 0,
+            }}
           />
         )}
 
-        {/* scrim: dense behind the type, clear over the figure. Explicit
-            width/height - Satori ignores the `inset` shorthand. */}
+        {/* Scrim behind the text, clear over the figure. */}
         <div
           style={{
             position: "absolute",
@@ -105,8 +110,8 @@ export default function OpengraphImage() {
               "linear-gradient(90deg, rgba(4,7,14,0.90) 0%, rgba(4,7,14,0.72) 34%, rgba(4,7,14,0.26) 66%, rgba(4,7,14,0.00) 100%)",
           }}
         />
-        {/* a second pass down the frame: the flower field at the bottom is the
-            brightest part of the art and the url sits on top of it. */}
+
+        {/* Bottom gradient for contrast. */}
         <div
           style={{
             position: "absolute",
@@ -133,15 +138,25 @@ export default function OpengraphImage() {
             padding: "58px 64px",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 22,
+            }}
+          >
             {avatar && (
               <img
                 src={avatar}
                 width={84}
                 height={84}
-                style={{ borderRadius: 42, border: "2px solid rgba(255,255,255,0.22)" }}
+                style={{
+                  borderRadius: 42,
+                  border: "2px solid rgba(255,255,255,0.22)",
+                }}
               />
             )}
+
             <div
               style={{
                 fontSize: 19,
@@ -153,7 +168,13 @@ export default function OpengraphImage() {
             </div>
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", maxWidth: 820 }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              maxWidth: 820,
+            }}
+          >
             <div
               style={{
                 fontSize: 94,
@@ -166,6 +187,7 @@ export default function OpengraphImage() {
             >
               {portfolio.name}
             </div>
+
             <div
               style={{
                 fontSize: 30,
@@ -179,7 +201,13 @@ export default function OpengraphImage() {
             </div>
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", marginTop: 8 }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              marginTop: 8,
+            }}
+          >
             <div
               style={{
                 fontSize: 22,
@@ -190,9 +218,30 @@ export default function OpengraphImage() {
             >
               {PROOF}
             </div>
-            <div style={{ display: "flex", alignItems: "center", gap: 20, marginTop: 22 }}>
-              <div style={{ height: 4, width: 52, background: "#d6242b", borderRadius: 2 }} />
-              <div style={{ fontSize: 26, color: "#ffffff" }}>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 20,
+                marginTop: 22,
+              }}
+            >
+              <div
+                style={{
+                  height: 4,
+                  width: 52,
+                  background: "#d6242b",
+                  borderRadius: 2,
+                }}
+              />
+
+              <div
+                style={{
+                  fontSize: 26,
+                  color: "#ffffff",
+                }}
+              >
                 {portfolio.url.replace(/^https?:\/\//, "")}
               </div>
             </div>
@@ -203,3 +252,4 @@ export default function OpengraphImage() {
     size,
   );
 }
+

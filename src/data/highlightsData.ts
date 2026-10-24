@@ -1,3 +1,4 @@
+
 export type Highlight = {
   id: string;
   title: string;
@@ -5,90 +6,63 @@ export type Highlight = {
   image: string;
   imageWidth: number;
   imageHeight: number;
-  imageFit?: "cover" | "contain";
-  cardWidth?: number;
+  imageFit: "contain" | "cover";
+  cardWidth: number;
   link?: string;
 };
 
-/**
- * Real proof, each linked to the post announcing it. Entries without an image
- * render as the blueprint-grid placeholder card, so adding one is optional.
- */
 export const highlightsData: Highlight[] = [
   {
-    id: "gsoc-2026-completed",
-    title: "Completed Google Summer of Code 2026 with the International Catrobat Association",
-    badge: "GSoC 2026",
-    image: "/highlights/gsoc-certificate.webp",
+    id: "raisina-dialogue-2026",
+    title:
+      "Selected to attend Raisina Dialogue 2026 through student accreditation",
+    badge: "Raisina Dialogue 2026",
+    image: "/highlights/raisina.jpeg",
     imageWidth: 1200,
-    imageHeight: 924,
+    imageHeight: 800,
     imageFit: "contain",
     cardWidth: 300,
   },
   {
-    id: "gsoc-2026",
-    title: "Selected for Google Summer of Code 2026 with the International Catrobat Association",
-    badge: "GSoC 2026",
-    image: "/highlights/gsoc-letter.webp",
+    id: "indo-china-youth-dialogue-2026",
+    title: "Selected for the Indo–China Youth Dialogue 2026",
+    badge: "Youth Dialogue 2026",
+    image: "/highlights/youth.jpeg",
     imageWidth: 1200,
-    imageHeight: 1492,
+    imageHeight: 800,
     imageFit: "contain",
-    cardWidth: 200,
-    link: "https://lnkd.in/p/gKrFtq7E",
-  },
-  {
-    id: "databricks-hackathon",
-    title: "Finalist at the Databricks Campus Hackathon - top 10 of 700+ teams",
-    badge: "Databricks",
-    image: "/highlights/databricks-hackathon.webp",
-    imageWidth: 800,
-    imageHeight: 533,
-    imageFit: "cover",
     cardWidth: 300,
-    link: "https://lnkd.in/p/gytyPAvj",
   },
   {
-    id: "sih-2025",
-    title: "Shortlisted for the Smart India Hackathon 2025 Grand Finale",
-    badge: "SIH 2025",
-    image: "/highlights/sih-finalist.webp",
-    imageWidth: 539,
-    imageHeight: 651,
+    id: "bjym-magazine",
+    title:
+      "Contributed to magazine and editorial initiatives associated with BJYM",
+    badge: "Editorial & Media",
+    image: "/highlights/article.png",
+    imageWidth: 1200,
+    imageHeight: 800,
     imageFit: "contain",
-    cardWidth: 205,
-    link: "https://lnkd.in/p/gbW-3NDm",
+    cardWidth: 300,
   },
   {
-    id: "leetcode-knight",
-    title: "Reached LeetCode Knight - top 5.72%",
-    badge: "LeetCode",
-    image: "/highlights/leetcode-knight.webp",
-    imageWidth: 1400,
-    imageHeight: 522,
-    imageFit: "cover",
-    cardWidth: 330,
-    link: "https://lnkd.in/p/gsfFB_GU",
+    id: "second-year-orientation",
+    title:
+      "Helped conduct the Second-Year Orientation Programme at MITS Gwalior",
+    badge: "Student Leadership",
+    image: "/highlights/orientation.jpeg",
+    imageWidth: 1200,
+    imageHeight: 800,
+    imageFit: "contain",
+    cardWidth: 300,
   },
   {
-    id: "leetcode-tshirt",
-    title: "LeetCode sent the shirt",
-    badge: "LeetCode",
-    image: "/highlights/leetcode-tshirt.webp",
-    imageWidth: 480,
-    imageHeight: 637,
-    imageFit: "cover",
-    cardWidth: 195,
-    link: "https://lnkd.in/p/gQrD2X6q",
-  },
-  {
-    id: "hacktoberfest",
-    title: "Completed Hacktoberfest and received the shirt",
-    badge: "Hacktoberfest",
-    image: "/highlights/hacktoberfest-tshirt.webp",
-    imageWidth: 800,
-    imageHeight: 600,
-    imageFit: "cover",
-    cardWidth: 270,
-    link: "https://lnkd.in/p/g9FaJZvx",
+    id: "amity-mun-best-dressed",
+    title: "Won Best Delegate at Amity Model United Nations",
+    badge: "Best Dressed and Best Delegate",
+    image: "/highlights/best del.jpeg",
+    imageWidth: 1200,
+    imageHeight: 800,
+    imageFit: "contain",
+    cardWidth: 280,
   },
 ];

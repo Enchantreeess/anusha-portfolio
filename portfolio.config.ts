@@ -1,98 +1,76 @@
+
 /**
- * The one file to edit when you fork this portfolio.
- *
- * Everything here is identity: who the site is about and where to find them.
- * Page *content* - roles, projects, skills, highlights - lives in `src/data/`.
- * See SETUP.md for the full list and what each file expects.
+ * Personal portfolio configuration.
+ * Update your identity here; page content lives in src/data/.
  */
 
 export const portfolio = {
   /** Shown in the hero, page titles and social cards. */
-  name: "Paras",
-  /** One line under the name. Keep it short - it is also the meta description. */
-  tagline: "Software engineer building concurrent systems, backend services, and production AI/ML.",
-  /** Longer form, used for Open Graph and the social hover cards. */
+  name: "Anusha Singh",
+
+  /** One line under your name. */
+  tagline:
+    "Computer Science & Design student exploring AI, research, and engineering.",
+
+  /** Longer description for search engines and social sharing. */
   description:
-    "Software engineer building concurrent systems, backend services, and production AI/ML across C++, Python, Java, and Kotlin.",
-  location: "Bengaluru, India",
-  /** IANA zone for the live clock in the banner. */
+    "Anusha Singh is a Computer Science & Design student at MITS Gwalior, building AI/ML systems, research projects, and thoughtful digital products.",
+
+  location: "Delhi/Gwalior, India",
   timeZone: "Asia/Kolkata",
-  /** UTC offset label shown on the social hover cards. */
   utcOffset: "UTC +05:30",
 
-  /** Canonical origin. NEXT_PUBLIC_SITE_URL overrides this at build time. */
-  url: "https://parascodes.is-a.dev",
+  /** Replace with your final deployed website URL later. */
+  url: "http://localhost:3000",
 
-  /**
-   * Usernames only, never full URLs - the code builds the links and the stats
-   * fetchers query these directly. Leave a value empty to hide that profile.
-   */
+  /** Enter your actual usernames. Empty values hide those profiles. */
   handles: {
-    github: "Paras-ydv",
-    linkedin: "parascodes",
-    x: "parascodes",
-    leetcode: "parascodes",
-    codeforces: "Paras_ydv",
-    codechef: "paras_ydv",
+    github: "Enchantreeess",
+    linkedin: "anusha-singhh",
+    x: "anushaandtech",
+    leetcode: "Enchantress06",
   },
 
-  /**
-   * Guestbook, backed by GitHub Discussions via giscus. Entries live as
-   * comments in your repo, so there is no database and no spam - signing
-   * requires a GitHub account. Get these from giscus.app after installing the
-   * giscus app on the repo. Leave `repoId` empty to hide the guestbook.
-   */
+  /** Giscus guestbook configuration. */
   giscus: {
-    repo: "Paras-ydv/portfolio" as `${string}/${string}`,
-    repoId: "R_kgDOVMzxpg",
-    category: "Announcements",
-    categoryId: "DIC_kwDOVMzxps4DI0RB",
+    repo: "Enchantreeess/Portfolio-",
+    repoId: "R_kgDOVKjbA",
+    category: "General",
+    categoryId: "DIC_kwDOVKjbM4DJe1f",
   },
 
-  /** This site's own source, linked in the footer. Set to "" to hide the link. */
-  repo: "https://github.com/Paras-ydv/portfolio",
+  /** Replace with your own GitHub repository after creating it. */
+  repo: "",
 
-  email: "parasydv77@gmail.com",
-  /** Path under /public. Swap the file and this string together. */
-  resume: "/Paras_Resume.pdf",
-  /** "Book an intro call" button. Set to "" to hide it. */
-  bookingLink: "https://cal.com/parascodes/30min",
+  /** Add your actual contact email. */
+  email: "anusha.singh.stem@gmail.com",
 
-  /**
-   * Search Console verification. Paste the `content` value from Google's
-   * "HTML tag" method here - just the token, not the whole <meta> tag. Left
-   * empty, no verification tag is emitted.
-   */
+  /** Put your own résumé PDF in public/ and enter its path here. */
+  resume: "/Anusha_Singh_resume_AI.pdf",
+
+  /** Add a booking link only if you want visitors to schedule calls. */
+  bookingLink: "https://cal.com/anusha.tech/15min",
+
+  /** Optional Google Search Console verification token. */
   googleSiteVerification: "",
 
-  /**
-   * Toggle optional sections off without deleting their code. The components
-   * and routes stay in place, so flipping one back to true is the whole job.
-   */
+  /** Optional sections. */
   sections: {
-    /** Off until the first post is written - an empty list reads as neglect. */
-    blog: false,
-    anime: true,
+    blog: true,
+    anime: false,
   },
 
-  /**
-   * Profile blurbs for the hover cards. GitHub's is replaced by the live bio
-   * when the API answers; the other two are always read from here because
-   * X and LinkedIn block unauthenticated requests.
-   */
+  /** Replace these with your own short profile descriptions. */
   bios: {
-    github: "Concurrent systems, backend services, and production AI/ML",
-    x: "GSoC'26 Catrobat | SDE Intern @GoCreditAI | Ex-NatWest, Samsung R&D, Carver Agents",
-    linkedin: "GSoC'26 Catrobat | SDE Intern at GoCredit AI | Ex-NatWest, Samsung R&D, Carver Agents",
+    github: "AI/ML, software engineering, and research",
+    x: "",
+    linkedin: "",
   },
 
-  /**
-   * X and LinkedIn give no public follower count, so there is nothing to fetch.
-   * Put real numbers here to show them, or leave null to show no stat row.
-   */
+  /** Use only real, current follower counts. */
   followers: {
-    x: "1K+" as string | null,
-    linkedin: "5K+" as string | null,
+    x: null as string | null,
+    linkedin: null as string | null,
   },
 } as const;
 

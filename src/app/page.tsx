@@ -5,9 +5,8 @@ import { ProjectsGrid } from "@/components/ProjectsGrid";
 import { ExperienceList } from "@/components/ExperienceList";
 import { BlogList } from "@/components/BlogList";
 import { Highlights } from "@/components/Highlights";
-import { AnimeMusic } from "@/components/AnimeMusic";
+import { AnimeMusic } from "@/components/AnimeMusic";import { DsaStats } from "@/components/DsaStats";
 import { Hackathons } from "@/components/Hackathons";
-import { DsaStats } from "@/components/DsaStats";
 import { Education } from "@/components/Education";
 import { FooterBackground } from "@/components/FooterBackground";
 import { RightNavbar } from "@/components/RightNavbar";
@@ -72,7 +71,7 @@ export default async function Home() {
       {/* Cell 1: Banner */}
       <div className="absolute left-0 right-0 md:left-[30%] md:right-[30%] top-0 h-[22vh] -z-0 pointer-events-auto overflow-hidden bg-white dark:bg-black shadow-[0_4px_12px_rgba(2,6,23,0.04)] dark:shadow-[0_4px_12px_rgba(2,6,23,0.10)]">
         <Image
-          src="/banner-light.jpg"
+          src="/banner-light-new.jpg"
           alt=""
           fill
           fetchPriority="high"
@@ -83,7 +82,7 @@ export default async function Home() {
           className="object-cover object-center dark:hidden"
         />
         <Image
-          src="/banner-dark.jpg"
+          src="/banner-dark-new.jpg"
           alt=""
           fill
           fetchPriority="high"
@@ -104,23 +103,17 @@ export default async function Home() {
 
       {/* Cell 2: Profile Section - 112px height to wrap the framed image (13px gap top/bottom) */}
       <div className="absolute left-0 right-0 md:left-[30%] md:right-[30%] top-[22vh] h-[112px] flex items-center px-4 z-50">
-        <div className="flex w-full items-center justify-between">
-
           <div className="flex items-center gap-4 sm:gap-5">
             <div className="relative p-[3px] rounded-[6px] sm:rounded-[8px] border-[1.5px] border-black/30 dark:border-white/[0.15] shrink-0">
               {/* The inner image */}
               <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-[3px] sm:rounded-[5px] overflow-hidden bg-zinc-100 dark:bg-zinc-900">
-                <Image
-                  src="/avatar.png"
-                  alt="Profile"
-                  width={240}
-                  height={240}
-                  quality={90}
-                  preload
-                  fetchPriority="high"
-                  sizes="(min-width: 640px) 120px, 96px"
-                  className="h-full w-full origin-center translate-y-1 scale-[1.1] object-cover opacity-90 grayscale contrast-100 mix-blend-multiply dark:mix-blend-normal"
-                />
+                
+<img
+  src="/avatar.png"
+  alt="Anusha Singh"
+  className="h-full w-full object-cover"
+/>
+
               </div>
             </div>
 
@@ -138,19 +131,38 @@ export default async function Home() {
           </div>
 
         </div>
-      </div>
 
+      
       {/* Flowing Content Section */}
       <div className="ml-0 mr-0 md:ml-[30%] md:mr-[30%] pt-[calc(22vh+112px)] pb-0 px-4 flex flex-col z-10 relative min-h-screen">
         <p className="text-[14px] sm:text-[15px] text-zinc-600 dark:text-zinc-300 leading-relaxed mt-4">
-          Software engineer. I build concurrent systems, backend services, and production AI/ML.
+          Exploring AI/ML, research, and the ideas that turn complex problems into meaningful solutions.
         </p>
 
         <ul className="text-[14px] sm:text-[15px] text-zinc-600 dark:text-zinc-300 leading-relaxed mt-4 pl-4">
-          <li className="flex gap-1.5"><span>•</span><span>Systems, open source, and applied AI/ML are what pull me in.</span></li>
-          <li className="flex gap-1.5"><span>•</span><span>Shipped thread-safe MQTT networking into an Android app with <span className="font-semibold text-zinc-900 dark:text-white">1M+ installs</span> at GSoC 2026, and ML-driven Wi-Fi RTT localization at Samsung that cut ranging error by <span className="font-semibold text-zinc-900 dark:text-white">31%</span>.</span></li>
-          <li className="flex gap-1.5"><span>•</span><span>Currently an <span className="font-semibold text-zinc-900 dark:text-white">SDE Intern at GoCredit AI</span>, and building <span className="font-semibold text-zinc-900 dark:text-white">VentureIQ</span>, <span className="font-semibold text-zinc-900 dark:text-white">CampusSync</span> and <span className="font-semibold text-zinc-900 dark:text-white">Unslop</span> on the side.</span></li>
+          <li className="flex gap-1.5">
+            <span>•</span>
+            <span>
+              Drawn to machine learning, intelligent systems, and research that pushes technology forward.
+            </span>
+          </li>
+
+          <li className="flex gap-1.5">
+            <span>•</span>
+            <span>
+              Building projects across <span className="font-semibold text-zinc-900 dark:text-white">AI-powered healthcare</span>, machine learning, and full-stack development.
+            </span>
+          </li>
+
+          <li className="flex gap-1.5">
+            <span>•</span>
+            <span>
+              Currently learning, experimenting, and turning curious ideas into meaningful solutions as a <span className="font-semibold text-zinc-900 dark:text-white">Computer Science &amp; Design student at MITS Gwalior</span>.
+            </span>
+          </li>
         </ul>
+
+
 
         {/* Buttons */}
         <div className="flex flex-wrap items-center gap-2 mt-4">
@@ -348,7 +360,7 @@ export default async function Home() {
         </div>
 
         {/* Github Graph */}
-        <GithubGraph />
+        {/* GitHub contribution graph skipped */}
 
 
         {/* DSA & Competitive Programming */}
@@ -500,19 +512,24 @@ export default async function Home() {
           </div>
         )}
 
-        {/* Anime & Music */}
-        <div id="anime" className="mt-6 flex flex-col relative z-10 scroll-mt-24">
+        {/* Movies and Music */}
+        <div id="movies" className="mt-6 flex flex-col relative z-10 scroll-mt-24">
           {/* Top full-width line */}
           <div
             className="absolute top-0 left-[-100vw] right-[-100vw] h-0 border-t border-black/30 dark:border-white/[0.15] pointer-events-none"
-            style={{ maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)' }}
+            style={{
+              maskImage:
+                "repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)",
+              WebkitMaskImage:
+                "repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)",
+            }}
           />
           {/* Top Line Intersections */}
           <div className="absolute top-0 -left-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] -translate-x-1/2 -translate-y-1/2 pointer-events-none z-20" />
           <div className="absolute top-0 -right-4 w-[2px] h-[2px] bg-black/50 dark:bg-white/[0.25] translate-x-1/2 -translate-y-1/2 pointer-events-none z-20" />
 
           <div className="py-2 relative mt-1">
-            <h2 className="text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">Anime &amp; Music</h2>
+            <h2 className="text-[18px] font-bold text-zinc-900 dark:text-zinc-100 tracking-tight">Movies &amp; Music</h2>
 
             {/* Horizontal line below heading */}
             <div className="absolute bottom-0 left-[-100vw] right-[-100vw] h-0 border-b border-black/30 dark:border-white/[0.15] pointer-events-none" style={{ maskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)', WebkitMaskImage: 'repeating-linear-gradient(to right, black 0, black 1px, transparent 1px, transparent 6px)' }} />

@@ -107,7 +107,7 @@ export default function ContactPage() {
       {/* Cell 1: Banner */}
 <div className="absolute left-0 right-0 md:left-[30%] md:right-[30%] top-0 h-[22vh] -z-0 pointer-events-auto overflow-hidden bg-white dark:bg-black shadow-[0_4px_12px_rgba(2,6,23,0.04)] dark:shadow-[0_4px_12px_rgba(2,6,23,0.10)]">
   <Image
-    src="/banner-light.jpg"
+    src="/banner-light-new.jpg"
     alt=""
     fill
     fetchPriority="high"
@@ -116,7 +116,7 @@ export default function ContactPage() {
     className="object-cover object-center dark:hidden"
   />
   <Image
-    src="/banner-dark.jpg"
+    src="/banner-dark-new.jpg"
     alt=""
     fill
     fetchPriority="high"

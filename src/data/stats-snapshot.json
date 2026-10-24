@@ -1,11 +1,11 @@
 {
-  "refreshedAt": "2026-10-17T21:14:20.650Z",
+  "refreshedAt": "2026-10-24T08:20:57.499Z",
   "leetcode": {
     "username": "parascodes",
     "rating": 1822,
     "maxRating": 1888,
-    "globalRanking": 65258,
-    "topPercentage": 7.51,
+    "globalRanking": 65376,
+    "topPercentage": 7.52,
     "contests": 33,
     "solved": {
       "all": 1074,
@@ -14,48 +14,13 @@
       "hard": 145
     },
     "totals": {
-      "easy": 971,
-      "medium": 2128,
-      "hard": 983
+      "easy": 972,
+      "medium": 2131,
+      "hard": 984
     },
     "streak": 60,
-    "activeDays": 244,
+    "activeDays": 239,
     "calendar": [
-      {
-        "date": "2025-10-18",
-        "count": 1,
-        "level": 1
-      },
-      {
-        "date": "2025-10-19",
-        "count": 0,
-        "level": 0
-      },
-      {
-        "date": "2025-10-20",
-        "count": 4,
-        "level": 1
-      },
-      {
-        "date": "2025-10-21",
-        "count": 1,
-        "level": 1
-      },
-      {
-        "date": "2025-10-22",
-        "count": 1,
-        "level": 1
-      },
-      {
-        "date": "2025-10-23",
-        "count": 5,
-        "level": 1
-      },
-      {
-        "date": "2025-10-24",
-        "count": 1,
-        "level": 1
-      },
       {
         "date": "2025-10-25",
         "count": 2,
@@ -1843,6 +1808,41 @@
       },
       {
         "date": "2026-10-17",
+        "count": 0,
+        "level": 0
+      },
+      {
+        "date": "2026-10-18",
+        "count": 0,
+        "level": 0
+      },
+      {
+        "date": "2026-10-19",
+        "count": 0,
+        "level": 0
+      },
+      {
+        "date": "2026-10-20",
+        "count": 0,
+        "level": 0
+      },
+      {
+        "date": "2026-10-21",
+        "count": 0,
+        "level": 0
+      },
+      {
+        "date": "2026-10-22",
+        "count": 0,
+        "level": 0
+      },
+      {
+        "date": "2026-10-23",
+        "count": 0,
+        "level": 0
+      },
+      {
+        "date": "2026-10-24",
         "count": 0,
         "level": 0
       }

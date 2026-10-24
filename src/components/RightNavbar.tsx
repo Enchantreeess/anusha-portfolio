@@ -9,22 +9,22 @@ export function RightNavbar() {
   const pathname = usePathname();
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
-  const links = useMemo(
-    () => [
-      // Blog is hidden while portfolio.config.ts has sections.blog = false.
-      ...(portfolio.sections.blog ? [{ name: "Blog", href: "#blogs" }] : []),
-      { name: "Experience", href: "#experience" },
-      { name: "Projects", href: "#projects" },
-      { name: "Hackathons", href: "#hackathons" },
-      { name: "DSA / CP", href: "#dsa" },
-      { name: "Skills", href: "#skills" },
-      { name: "Education", href: "#education" },
-      { name: "Anime & Music", href: "#anime" },
-      { name: "Highlights", href: "#highlights" },
-      { name: "Guestbook", href: "#guestbook" },
-    ],
-    []
-  );
+  
+const links = useMemo(
+  () => [
+    { name: "Experience", href: "#experience" },
+    { name: "Projects", href: "#projects" },
+    { name: "Hackathons", href: "#hackathons" },
+    { name: "DSA / CP", href: "#dsa" },
+    { name: "Skills", href: "#skills" },
+    { name: "Education", href: "#education" },
+    ...(portfolio.sections.blog ? [{ name: "Blog", href: "#blogs" }] : []),
+    { name: "Movies & Music", href: "#movies" },
+    { name: "Highlights", href: "#highlights" },
+    { name: "Guestbook", href: "#guestbook" },
+  ],
+  []
+);
 
   useEffect(() => {
     // Derived from `links`, so a new section can never be missed the way

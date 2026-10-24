@@ -7,8 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { portfolio } from "~/portfolio.config";
 import Image, { getImageProps } from "next/image";
-import lightBannerImage from "../../../public/banner-light.jpg";
-import darkBannerImage from "../../../public/banner-dark.jpg";
+import lightBannerImage from "../../../public/banner-light-new.jpg";
+import darkBannerImage from "../../../public/banner-dark-new.jpg";
 
 const bannerImageProps = { width: 250, height: 64, quality: 70, sizes: "250px" } as const;
 const lightBannerPreload = getImageProps({ ...bannerImageProps, alt: "", src: lightBannerImage }).props;
